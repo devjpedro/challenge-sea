@@ -11,13 +11,13 @@ export function App() {
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: defaultTheme.primaryColor,
+            colorPrimary: defaultTheme.colors.primaryColor,
           },
           components: {
             Layout: {
-              bodyBg: defaultTheme['gray-100'],
-              siderBg: defaultTheme['gray-100'],
-              headerBg: defaultTheme.white,
+              bodyBg: defaultTheme.colors['gray-100'],
+              siderBg: defaultTheme.colors['gray-100'],
+              headerBg: defaultTheme.colors.white,
             },
           },
         }}

@@ -1,9 +1,10 @@
 import { Layout } from 'antd'
 
 import { NavSidebar } from '../../ui/nav-sidebar'
-import { ContentLayout, CustomSider } from './styles'
+import { StepsHeader } from '../../ui/steps-header'
+import { ContentLayout, CustomHeader, CustomSider } from './styles'
 
-const { Content, Header } = Layout
+const { Content } = Layout
 
 export function DashboardLayout() {
   return (
@@ -28,12 +29,14 @@ export function DashboardLayout() {
         <NavSidebar />
       </CustomSider>
       <ContentLayout>
-        <Header className="header">Header</Header>
+        <CustomHeader>
+          <StepsHeader />
+        </CustomHeader>
         <Content className="content">
-          {/* <Flex gap="large">
-              <MainContent />
-              <SideContent />
-            </Flex> */}
+          {/* <Flex gap="large"> */}
+          {/* <SideContent /> */}
+          {/* <MainContent /> */}
+          {/* </Flex> */}
         </Content>
       </ContentLayout>
     </Layout>

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const CustomMenu = styled(Menu)`
   position: relative;
 
-  background-color: ${(props) => props.theme.primaryColor};
+  background-color: ${(props) => props.theme.colors.primaryColor};
   height: 75vh;
   border-start-end-radius: 1.25rem;
   border-end-end-radius: 1.25rem;
@@ -18,8 +18,8 @@ export const CustomMenu = styled(Menu)`
   gap: 1rem;
 
   li {
-    background-color: ${(props) => props.theme['gray-100']};
-    color: ${(props) => props.theme.primaryColor} !important;
+    background-color: ${(props) => props.theme.colors['gray-100']};
+    color: ${(props) => props.theme.colors.primaryColor} !important;
 
     display: flex !important;
     align-items: center !important;
@@ -35,7 +35,7 @@ export const CustomMenu = styled(Menu)`
     }
 
     &:hover {
-      background-color: ${(props) => props.theme.white} !important;
+      background-color: ${(props) => props.theme.colors.white} !important;
     }
 
     &::before {
@@ -43,7 +43,7 @@ export const CustomMenu = styled(Menu)`
       display: none;
       width: 3px;
       height: 100%;
-      background-color: ${(props) => props.theme.white};
+      background-color: ${(props) => props.theme.colors.white};
 
       position: absolute;
       top: 0;
@@ -51,7 +51,7 @@ export const CustomMenu = styled(Menu)`
     }
 
     &.ant-menu-item-selected {
-      background-color: ${(props) => props.theme.white};
+      background-color: ${(props) => props.theme.colors.white};
     }
 
     &.ant-menu-item-selected::before {

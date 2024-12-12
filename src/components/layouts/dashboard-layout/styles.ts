@@ -16,3 +16,10 @@ export const CustomSider = styled(Layout.Sider)`
 
   flex: auto !important;
 `
+
+export const CustomHeader = styled(Layout.Header)`
+  padding: 1.5rem 2rem !important;
+  height: auto !important;
+  box-shadow: ${(props) => props.theme.shadows['shadow-1']};
+  border-radius: 16px;
+`

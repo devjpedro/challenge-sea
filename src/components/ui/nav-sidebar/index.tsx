@@ -7,7 +7,7 @@ import {
   FaUser,
 } from 'react-icons/fa'
 
-import { CustomMenu } from './styled'
+import { CustomMenu } from './styles'
 
 const navItems = [
   {
