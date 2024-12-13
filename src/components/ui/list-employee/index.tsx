@@ -2,15 +2,15 @@ import { Button, Flex, type MenuProps, Typography } from 'antd'
 import { FaEllipsisH, FaPlus } from 'react-icons/fa'
 
 import {
-  AddMemberBtn,
-  CardUser,
+  AddEmployeeBtn,
+  CardEmployee,
   CustomDropdown,
   CustomTag,
   FlexContainerBtns,
   ListContainer,
 } from './styles'
 
-const membersData = [
+const employeeData = [
   {
     id: 1,
     name: 'Daniel Alves da Silva',
@@ -55,16 +55,16 @@ const items: MenuProps['items'] = [
   },
 ]
 
-export function ListUsers() {
+export function ListEmployee() {
   return (
     <ListContainer title="Funcionário (s)">
-      <AddMemberBtn
+      <AddEmployeeBtn
         variant="outlined"
         color="primary"
         icon={<FaPlus size={10} />}
       >
         Adicionar Funcionário
-      </AddMemberBtn>
+      </AddEmployeeBtn>
 
       <Flex
         gap="large"
@@ -87,20 +87,20 @@ export function ListUsers() {
       </Flex>
 
       <Flex vertical justify="center" gap="large" style={{ marginTop: '3rem' }}>
-        {membersData.map((member) => (
-          <CardUser
-            key={member.id}
+        {employeeData.map((employee) => (
+          <CardEmployee
+            key={employee.id}
             vertical
             gap="0.25rem"
-            status={member.status}
+            status={employee.status}
           >
             <Typography.Text className="name-user">
-              {member.name}
+              {employee.name}
             </Typography.Text>
             <Flex gap="small">
-              <CustomTag>{member.cpf}</CustomTag>
-              <CustomTag>{member.status}</CustomTag>
-              <CustomTag>{member.role}</CustomTag>
+              <CustomTag>{employee.cpf}</CustomTag>
+              <CustomTag>{employee.status}</CustomTag>
+              <CustomTag>{employee.role}</CustomTag>
             </Flex>
 
             <CustomDropdown
@@ -111,7 +111,7 @@ export function ListUsers() {
             >
               <FaEllipsisH size={20} />
             </CustomDropdown>
-          </CardUser>
+          </CardEmployee>
         ))}
       </Flex>
     </ListContainer>

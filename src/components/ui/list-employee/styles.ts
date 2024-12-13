@@ -1,7 +1,7 @@
 import { Button, Card, Dropdown, Flex, Tag } from 'antd'
 import styled from 'styled-components'
 
-interface CardUserProps {
+interface CardEmployeeProps {
   status: string
 }
 
@@ -25,7 +25,7 @@ export const ListContainer = styled(Card)`
   }
 `
 
-export const AddMemberBtn = styled(Button)`
+export const AddEmployeeBtn = styled(Button)`
   width: 100%;
   padding: 2rem 0.75rem;
   border-radius: 0.625rem;
@@ -47,7 +47,7 @@ export const FlexContainerBtns = styled(Flex)`
   }
 `
 
-export const CardUser = styled(Flex)<CardUserProps>`
+export const CardEmployee = styled(Flex)<CardEmployeeProps>`
   position: relative;
 
   background-color: ${(props) =>
