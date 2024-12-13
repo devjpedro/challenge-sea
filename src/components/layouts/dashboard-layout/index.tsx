@@ -1,5 +1,6 @@
 import { Layout } from 'antd'
 
+import { ListUsers } from '../../ui/list-users'
 import { NavSidebar } from '../../ui/nav-sidebar'
 import { SideContent } from '../../ui/side-content'
 import { StepsHeader } from '../../ui/steps-header'
@@ -32,7 +33,7 @@ export function DashboardLayout() {
         </CustomHeader>
         <CustomContent>
           <SideContent />
-          <main style={{ flex: 2 }}>Conteúdo Principal</main>
+          <ListUsers />
           {/* <MainContent /> */}
         </CustomContent>
       </ContentLayout>

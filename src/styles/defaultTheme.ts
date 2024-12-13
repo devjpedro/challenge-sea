@@ -3,8 +3,10 @@ export const defaultTheme = {
   colors: {
     white: '#ffffff',
     primaryColor: '#649fbf',
+    primaryColorLight: '#e0ecf2',
     'gray-100': '#f2f2f2',
     'gray-300': '#959595',
+    'gray-500': '#707070',
   },
 
   // Shadows
