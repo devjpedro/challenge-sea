@@ -1,21 +1,19 @@
 import { Layout } from 'antd'
 
 import { NavSidebar } from '../../ui/nav-sidebar'
+import { SideContent } from '../../ui/side-content'
 import { StepsHeader } from '../../ui/steps-header'
-import { ContentLayout, CustomHeader, CustomSider } from './styles'
-
-const { Content } = Layout
+import {
+  ContentLayout,
+  CustomContent,
+  CustomHeader,
+  CustomSider,
+} from './styles'
 
 export function DashboardLayout() {
   return (
     <Layout>
-      <CustomSider
-        theme="light"
-        trigger={null}
-        collapsible
-        collapsed
-        className="sider"
-      >
+      <CustomSider theme="light" trigger={null} collapsible collapsed>
         <div
           style={{
             width: '100%',
@@ -32,12 +30,11 @@ export function DashboardLayout() {
         <CustomHeader>
           <StepsHeader />
         </CustomHeader>
-        <Content className="content">
-          {/* <Flex gap="large"> */}
-          {/* <SideContent /> */}
+        <CustomContent>
+          <SideContent />
+          <main style={{ flex: 2 }}>Conteúdo Principal</main>
           {/* <MainContent /> */}
-          {/* </Flex> */}
-        </Content>
+        </CustomContent>
       </ContentLayout>
     </Layout>
   )

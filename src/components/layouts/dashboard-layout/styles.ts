@@ -23,3 +23,10 @@ export const CustomHeader = styled(Layout.Header)`
   box-shadow: ${(props) => props.theme.shadows['shadow-1']};
   border-radius: 16px;
 `
+
+export const CustomContent = styled(Layout.Content)`
+  margin-top: 2rem;
+  display: flex;
+  align-items: start;
+  gap: 2rem;
+`

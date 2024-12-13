@@ -1,4 +1,4 @@
-import { Button } from 'antd'
+import { Button, Typography } from 'antd'
 import styled from 'styled-components'
 
 export const CustomButtonStep = styled(Button)`
@@ -13,5 +13,12 @@ export const CustomButtonStep = styled(Button)`
 
   &:not(:disabled) {
     border: 2px solid #202020;
+  }
+`
+export const StyledLabel = styled(Typography.Text)`
+  font-weight: 500;
+
+  &:not(.ant-typography-disabled) {
+    color: ${(props) => props.theme.colors.primaryColor} !important;
   }
 `
