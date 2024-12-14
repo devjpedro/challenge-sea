@@ -1,4 +1,5 @@
 import { ConfigProvider } from 'antd'
+import ptBR from 'antd/locale/pt_BR'
 import { BrowserRouter } from 'react-router'
 import { ThemeProvider } from 'styled-components'
 
@@ -11,6 +12,7 @@ export function App() {
     <BrowserRouter>
       <ThemeProvider theme={defaultTheme}>
         <ConfigProvider
+          locale={ptBR}
           theme={{
             token: {
               colorPrimary: defaultTheme.colors.primaryColor,

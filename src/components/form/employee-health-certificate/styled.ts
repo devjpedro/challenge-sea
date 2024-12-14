@@ -53,6 +53,10 @@ export const EmployeeActivityContainer = styled(Flex)`
     height: 2.5rem !important;
   }
 
+  .ant-select-status-error .ant-select-selector {
+    border-color: ${(props) => props.theme.colors['red-500']} !important;
+  }
+
   .ant-checkbox-inner {
     border-color: ${(props) => props.theme.colors.primaryColor} !important;
   }

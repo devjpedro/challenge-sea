@@ -8,6 +8,7 @@ export const defaultTheme = {
     'gray-200': '#dbdbdb',
     'gray-300': '#959595',
     'gray-500': '#707070',
+    'red-500': '#ef4444',
   },
 
   // Shadows

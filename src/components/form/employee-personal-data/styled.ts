@@ -9,7 +9,8 @@ export const EmployeeInformationContainer = styled(Flex)`
   box-shadow: ${(props) => props.theme.shadows['shadow-2']};
   margin-top: 1rem;
 
-  input {
+  input,
+  .ant-picker {
     height: 2.875rem !important;
 
     border-color: ${(props) => props.theme.colors.primaryColor};
@@ -42,6 +43,16 @@ export const EmployeeInformationContainer = styled(Flex)`
     border-radius: 10px !important;
     font-size: 1rem !important;
     height: 2.875rem !important;
+  }
+
+  .ant-select-status-error .ant-select-selector {
+    border-color: ${(props) => props.theme.colors['red-500']} !important;
+  }
+
+  .ant-form-item-explain {
+    margin-bottom: 0.875rem;
+    margin-left: 0.25rem;
+    margin-top: 0.125rem;
   }
 `
 

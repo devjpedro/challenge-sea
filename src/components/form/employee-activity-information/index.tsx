@@ -1,12 +1,93 @@
 import { Button, Checkbox, Flex, Input, Select, Typography } from 'antd'
+import { useFormContext } from 'react-hook-form'
+import { FormItem } from 'react-hook-form-antd'
 
+import type { EmployeeForm } from '../../../validations/employee-schema'
 import {
   CustomLabel,
   EmployeeActivityContainer,
+  RemoveIcon,
   SelectActivityContainer,
 } from './styled'
 
-export function EmployeeActivityInformationForm() {
+type Epi = {
+  selectedEPI: string
+  caNumber: string
+}
+
+type Activity = {
+  activityName: string
+  epis: Epi[]
+}
+
+export function EmployeeActivityInformationForm({
+  noHasEpi,
+  setNoHasEpi,
+}: {
+  noHasEpi: boolean
+  setNoHasEpi: (value: boolean) => void
+}) {
+  const { control, watch, setValue } = useFormContext<EmployeeForm>()
+
+  const activites = watch('activities')
+
+  const handleAddActivity = () => {
+    if (!activites) return
+
+    const newActivity: Activity = {
+      activityName: '',
+      epis: [
+        {
+          selectedEPI: '',
+          caNumber: '',
+        },
+      ],
+    }
+
+    setValue('activities', [...activites, newActivity])
+  }
+
+  const handleRemoveActivity = (activityIndex: number) => {
+    if (!activites) return
+
+    const updatedActivities = activites.filter(
+      (_, index) => index !== activityIndex,
+    )
+
+    setValue('activities', updatedActivities)
+  }
+
+  const handleAddEpi = (activityIndex: number) => {
+    if (!activites) return
+
+    const newEpi: Epi = {
+      selectedEPI: '',
+      caNumber: '',
+    }
+
+    const updatedActivities = [...activites]
+
+    if (!updatedActivities[activityIndex].epis) return
+
+    updatedActivities[activityIndex].epis.push(newEpi)
+
+    setValue('activities', updatedActivities)
+  }
+
+  const handleRemoveEpi = (activityIndex: number, epiIndex: number) => {
+    if (!activites) return
+
+    const updatedActivities = [...activites]
+
+    if (!updatedActivities[activityIndex].epis) return
+
+    updatedActivities[activityIndex].epis = updatedActivities[
+      activityIndex
+    ].epis.filter((_, index) => index !== epiIndex)
+
+    setValue('activities', updatedActivities)
+  }
+
   return (
     <EmployeeActivityContainer vertical gap="1.5rem">
       <Flex vertical gap="0.875rem" wrap="wrap">
@@ -14,54 +95,162 @@ export function EmployeeActivityInformationForm() {
           Quais EPIs o trabalhador usa na atividade?
         </Typography.Title>
 
-        <Checkbox>O trabalhador não usa EPI.</Checkbox>
+        <Checkbox
+          checked={noHasEpi}
+          onChange={(event) => {
+            setNoHasEpi(event.target.checked)
+            setValue('activities', [
+              {
+                activityName: '',
+                epis: [
+                  {
+                    selectedEPI: '',
+                    caNumber: '',
+                  },
+                ],
+              },
+            ])
+          }}
+        >
+          O trabalhador não usa EPI.
+        </Checkbox>
       </Flex>
 
-      <SelectActivityContainer vertical gap="2rem">
-        <Flex vertical>
-          <CustomLabel htmlFor="activity">Selecione a atividade:</CustomLabel>
-          <Select
-            size="large"
-            placeholder="Atividade"
-            id="activity"
-            options={[
-              { value: 'atividade-1', label: 'Atividade 1' },
-              { value: 'atividade-2', label: 'Atividade 2' },
-              { value: 'atividade-3', label: 'Atividade 3' },
-              { value: 'atividade-4', label: 'Atividade 4' },
-              { value: 'atividade-5', label: 'Atividade 5' },
-            ]}
-          />
-        </Flex>
+      {!noHasEpi && !!activites?.length && (
+        <>
+          <Flex vertical gap="large">
+            {activites.map((activity, index) => (
+              <SelectActivityContainer key={index} vertical gap="1rem">
+                {index > 0 && (
+                  <RemoveIcon onClick={() => handleRemoveActivity(index)} />
+                )}
 
-        <Flex gap="2rem" align="end" wrap="wrap">
-          <Flex vertical style={{ flex: 1 }}>
-            <CustomLabel htmlFor="epi">Selecione o EPI:</CustomLabel>
-            <Select
-              size="large"
-              placeholder="Selecione o EPI"
-              id="epi"
-              options={[
-                { value: 'capacete-seguranca', label: 'Capacete de Segurança' },
-                { value: 'oculos-seguranca', label: 'Óculos de Segurança' },
-                { value: 'protetor-auricular', label: 'Protetor Auricular' },
-                { value: 'respirador', label: 'Respirador' },
-                { value: 'luva-seguranca', label: 'Luva de Segurança' },
-                { value: 'botina-seguranca', label: 'Botina de Segurança' },
-                { value: 'avental-protecao', label: 'Avental de Proteção' },
-                { value: 'cinto-seguranca', label: 'Cinto de Segurança' },
-                { value: 'mascara-solda', label: 'Máscara de Solda' },
-                { value: 'viseira-facial', label: 'Viseira Facial' },
-              ]}
-            />
-          </Flex>
+                <Flex vertical>
+                  <CustomLabel htmlFor="activity">
+                    Selecione a atividade:
+                  </CustomLabel>
+                  <FormItem
+                    control={control}
+                    name={`activities.${index}.activityName`}
+                  >
+                    <Select
+                      size="large"
+                      placeholder="Atividade"
+                      id="activity"
+                      options={[
+                        { value: 'atividade-1', label: 'Atividade 1' },
+                        { value: 'atividade-2', label: 'Atividade 2' },
+                        { value: 'atividade-3', label: 'Atividade 3' },
+                        { value: 'atividade-4', label: 'Atividade 4' },
+                        { value: 'atividade-5', label: 'Atividade 5' },
+                      ]}
+                    />
+                  </FormItem>
+                </Flex>
 
-          <Flex vertical style={{ flex: 1 }}>
-            <CustomLabel htmlFor="caNumber">
-              Informe o número do CA:
-            </CustomLabel>
+                {!!activity.epis &&
+                  activity.epis.map((_, epiIndex) => (
+                    <Flex key={epiIndex} gap="2rem" align="end" wrap="wrap">
+                      <Flex vertical style={{ flex: 1 }}>
+                        <CustomLabel htmlFor="epi">
+                          Selecione o EPI:
+                        </CustomLabel>
+                        <FormItem
+                          control={control}
+                          name={`activities.${index}.epis.${epiIndex}.selectedEPI`}
+                        >
+                          <Select
+                            size="large"
+                            placeholder="Selecione o EPI"
+                            id="epi"
+                            options={[
+                              {
+                                value: 'capacete-seguranca',
+                                label: 'Capacete de Segurança',
+                              },
+                              {
+                                value: 'oculos-seguranca',
+                                label: 'Óculos de Segurança',
+                              },
+                              {
+                                value: 'protetor-auricular',
+                                label: 'Protetor Auricular',
+                              },
+                              { value: 'respirador', label: 'Respirador' },
+                              {
+                                value: 'luva-seguranca',
+                                label: 'Luva de Segurança',
+                              },
+                              {
+                                value: 'botina-seguranca',
+                                label: 'Botina de Segurança',
+                              },
+                              {
+                                value: 'avental-protecao',
+                                label: 'Avental de Proteção',
+                              },
+                              {
+                                value: 'cinto-seguranca',
+                                label: 'Cinto de Segurança',
+                              },
+                              {
+                                value: 'mascara-solda',
+                                label: 'Máscara de Solda',
+                              },
+                              {
+                                value: 'viseira-facial',
+                                label: 'Viseira Facial',
+                              },
+                            ]}
+                          />
+                        </FormItem>
+                      </Flex>
 
-            <Input placeholder="Número do CA" id="caNumber" />
+                      <Flex vertical style={{ flex: 1 }}>
+                        <CustomLabel htmlFor="caNumber">
+                          Informe o número do CA:
+                        </CustomLabel>
+                        <FormItem
+                          control={control}
+                          name={`activities.${index}.epis.${epiIndex}.caNumber`}
+                        >
+                          <Input placeholder="Número do CA" id="caNumber" />
+                        </FormItem>
+                      </Flex>
+
+                      {!!activity.epis &&
+                        epiIndex < activity.epis.length - 1 && (
+                          <Button
+                            style={{
+                              flex: 1,
+                            }}
+                            size="large"
+                            variant="outlined"
+                            color="primary"
+                            onClick={() => handleRemoveEpi(index, epiIndex)}
+                          >
+                            Excluir EPI
+                          </Button>
+                        )}
+
+                      {!!activity.epis &&
+                        epiIndex === activity.epis.length - 1 && (
+                          <Button
+                            style={{
+                              flex: 1,
+                            }}
+                            size="large"
+                            variant="outlined"
+                            color="primary"
+                            onClick={() => handleAddEpi(index)}
+                          >
+                            Adicionar EPI
+                          </Button>
+                        )}
+                    </Flex>
+                  ))}
+              </SelectActivityContainer>
+            ))}
           </Flex>
 
           <Button
@@ -69,19 +258,12 @@ export function EmployeeActivityInformationForm() {
             size="large"
             variant="outlined"
             color="primary"
+            onClick={handleAddActivity}
           >
-            Adicionar EPI
+            Adicionar outra atividade
           </Button>
-        </Flex>
-      </SelectActivityContainer>
-      <Button
-        style={{ flex: 1 }}
-        size="large"
-        variant="outlined"
-        color="primary"
-      >
-        Adicionar outra atividade
-      </Button>
+        </>
+      )}
     </EmployeeActivityContainer>
   )
 }
