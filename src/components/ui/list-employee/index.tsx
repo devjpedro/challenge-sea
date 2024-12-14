@@ -4,10 +4,10 @@ import { FaEllipsisH, FaPlus } from 'react-icons/fa'
 import {
   AddEmployeeBtn,
   CardEmployee,
+  Container,
   CustomDropdown,
   CustomTag,
   FlexContainerBtns,
-  ListContainer,
 } from './styles'
 
 const employeeData = [
@@ -57,7 +57,7 @@ const items: MenuProps['items'] = [
 
 export function ListEmployee() {
   return (
-    <ListContainer title="Funcionário (s)">
+    <Container title="Funcionário (s)">
       <AddEmployeeBtn
         variant="outlined"
         color="primary"
@@ -114,6 +114,6 @@ export function ListEmployee() {
           </CardEmployee>
         ))}
       </Flex>
-    </ListContainer>
+    </Container>
   )
 }

@@ -1,6 +1,6 @@
 import { Layout } from 'antd'
 
-import { ListEmployee } from '../../ui/list-employee'
+import { AddEmployee } from '../../ui/add-employee'
 import { NavSidebar } from '../../ui/nav-sidebar'
 import { SideContent } from '../../ui/side-content'
 import { StepsHeader } from '../../ui/steps-header'
@@ -33,7 +33,8 @@ export function DashboardLayout() {
         </CustomHeader>
         <CustomContent>
           <SideContent />
-          <ListEmployee />
+          <AddEmployee />
+          {/* <ListEmployee /> */}
           {/* <MainContent /> */}
         </CustomContent>
       </ContentLayout>

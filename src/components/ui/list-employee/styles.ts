@@ -5,7 +5,7 @@ interface CardEmployeeProps {
   status: string
 }
 
-export const ListContainer = styled(Card)`
+export const Container = styled(Card)`
   flex: 2;
 
   background-color: ${(props) => props.theme.colors.white};
