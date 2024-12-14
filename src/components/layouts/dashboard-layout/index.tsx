@@ -1,6 +1,7 @@
 import { Layout } from 'antd'
 
 import { ListEmployee } from '../../ui/list-employee'
+import { MenuMobile } from '../../ui/menu-mobile'
 import { NavSidebar } from '../../ui/nav-sidebar'
 import { SideContent } from '../../ui/side-content'
 import { StepsHeader } from '../../ui/steps-header'
@@ -27,6 +28,9 @@ export function DashboardLayout() {
         ></div>
         <NavSidebar />
       </CustomSider>
+
+      <MenuMobile />
+
       <ContentLayout>
         <CustomHeader>
           <StepsHeader />

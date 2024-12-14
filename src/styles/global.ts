@@ -7,4 +7,8 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: "Inter", sans-serif !important;
   }
+
+  body {
+    background-color: ${(props) => props.theme.colors['gray-100']};
+  }
 `

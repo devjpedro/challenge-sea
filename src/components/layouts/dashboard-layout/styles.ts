@@ -23,6 +23,7 @@ export const ContentLayout = styled(Layout)`
 
   @media (max-width: 768px) {
     margin-left: 0;
+    margin-top: 4rem;
   }
 
   @media (max-width: 640px) {
