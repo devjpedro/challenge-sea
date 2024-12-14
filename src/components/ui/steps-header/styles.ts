@@ -1,5 +1,10 @@
-import { Button, Typography } from 'antd'
+import { Button, Flex, Typography } from 'antd'
 import styled from 'styled-components'
+
+export const StepHeaderContainer = styled(Flex)`
+  overflow-x: auto;
+  padding: 0 0.75rem;
+`
 
 export const CustomButtonStep = styled(Button)`
   width: 56px !important;
@@ -15,6 +20,7 @@ export const CustomButtonStep = styled(Button)`
     border: 2px solid #202020;
   }
 `
+
 export const StyledLabel = styled(Typography.Text)`
   font-weight: 500;
 

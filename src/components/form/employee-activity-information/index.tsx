@@ -9,7 +9,7 @@ import {
 export function EmployeeActivityInformationForm() {
   return (
     <EmployeeActivityContainer vertical gap="1.5rem">
-      <Flex vertical gap="0.875rem">
+      <Flex vertical gap="0.875rem" wrap="wrap">
         <Typography.Title level={5}>
           Quais EPIs o trabalhador usa na atividade?
         </Typography.Title>
@@ -34,7 +34,7 @@ export function EmployeeActivityInformationForm() {
           />
         </Flex>
 
-        <Flex gap="2rem" align="end">
+        <Flex gap="2rem" align="end" wrap="wrap">
           <Flex vertical style={{ flex: 1 }}>
             <CustomLabel htmlFor="epi">Selecione o EPI:</CustomLabel>
             <Select

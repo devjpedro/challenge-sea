@@ -1,19 +1,19 @@
 import { Col, Input, Radio, Row, Select } from 'antd'
 
-import { EmployeeInformationContainer } from './styled'
+import { CustomLabel, EmployeeInformationContainer } from './styled'
 
 export function EmployeePersonalDataForm() {
   return (
     <EmployeeInformationContainer vertical gap="1.5rem">
       <Row gutter={24}>
-        <Col span={12}>
-          <label htmlFor="name">Nome</label>
+        <Col xs={24} sm={12}>
+          <CustomLabel htmlFor="name">Nome</CustomLabel>
           <Input placeholder="Nome" id="name" />
         </Col>
-        <Col span={12}>
-          <label htmlFor="sex" style={{ marginBottom: '1rem' }}>
+        <Col xs={24} sm={12}>
+          <CustomLabel htmlFor="sex" style={{ marginBottom: '1rem' }}>
             Sexo
-          </label>
+          </CustomLabel>
 
           <Radio.Group id="sex">
             <Radio value="feminino">Feminino</Radio>
@@ -23,23 +23,23 @@ export function EmployeePersonalDataForm() {
       </Row>
 
       <Row gutter={24}>
-        <Col span={12}>
-          <label htmlFor="cpf">CPF</label>
+        <Col xs={24} sm={12}>
+          <CustomLabel htmlFor="cpf">CPF</CustomLabel>
           <Input placeholder="CPF" id="cpf" />
         </Col>
-        <Col span={12}>
-          <label htmlFor="birthday">Data de Nascimento</label>
+        <Col xs={24} sm={12}>
+          <CustomLabel htmlFor="birthday">Data de Nascimento</CustomLabel>
           <Input placeholder="Data de Nascimento" id="birthday" />
         </Col>
       </Row>
 
       <Row gutter={24}>
-        <Col span={12}>
-          <label htmlFor="rg">RG</label>
+        <Col xs={24} sm={12}>
+          <CustomLabel htmlFor="rg">RG</CustomLabel>
           <Input placeholder="RG" id="rg" />
         </Col>
-        <Col span={12}>
-          <label htmlFor="role">Cargo</label>
+        <Col xs={24} sm={12}>
+          <CustomLabel htmlFor="role">Cargo</CustomLabel>
 
           <Select
             size="large"

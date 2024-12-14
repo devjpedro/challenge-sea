@@ -6,6 +6,7 @@ interface CardEmployeeProps {
 }
 
 export const Container = styled(Card)`
+  width: 100%;
   flex: 2;
 
   background-color: ${(props) => props.theme.colors.white};
@@ -63,6 +64,10 @@ export const CardEmployee = styled(Flex)<CardEmployeeProps>`
     color: ${(props) => props.theme.colors['gray-500']};
     font-size: 1.5rem;
     font-weight: 500;
+
+    @media (max-width: 480px) {
+      font-size: 1rem;
+    }
   }
 `
 

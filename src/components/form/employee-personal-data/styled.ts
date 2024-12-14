@@ -21,13 +21,6 @@ export const EmployeeInformationContainer = styled(Flex)`
     }
   }
 
-  label:not(.ant-radio-wrapper) {
-    display: block;
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.625rem;
-  }
-
   .ant-radio-wrapper {
     font-size: 1rem;
   }
@@ -49,5 +42,16 @@ export const EmployeeInformationContainer = styled(Flex)`
     border-radius: 10px !important;
     font-size: 1rem !important;
     height: 2.875rem !important;
+  }
+`
+
+export const CustomLabel = styled.label`
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.625rem;
+
+  @media (max-width: 575px) {
+    margin-top: 12px;
   }
 `

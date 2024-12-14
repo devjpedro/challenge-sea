@@ -1,7 +1,7 @@
-import { Flex } from 'antd'
+import { Card } from 'antd'
 import styled from 'styled-components'
 
-export const ContainerSideContent = styled(Flex)`
+export const ContainerSideContent = styled(Card)`
   flex: 1;
 
   background-color: ${(props) => props.theme.colors.white};
@@ -20,5 +20,9 @@ export const ContainerSideContent = styled(Flex)`
     display: block;
     height: 100%;
     border-radius: 12px;
+  }
+
+  @media (max-width: 575px) {
+    padding: 0;
   }
 `

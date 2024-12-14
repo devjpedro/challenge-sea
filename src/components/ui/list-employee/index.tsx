@@ -71,8 +71,9 @@ export function ListEmployee() {
         justify="space-between"
         align="center"
         style={{ marginTop: '1rem' }}
+        wrap="wrap"
       >
-        <FlexContainerBtns gap="large" align="center">
+        <FlexContainerBtns gap="large" align="center" wrap="wrap">
           <Button variant="outlined" color="primary" size="large">
             Ver apenas ativos
           </Button>
@@ -93,11 +94,12 @@ export function ListEmployee() {
             vertical
             gap="0.25rem"
             status={employee.status}
+            wrap="wrap"
           >
             <Typography.Text className="name-user">
               {employee.name}
             </Typography.Text>
-            <Flex gap="small">
+            <Flex gap="small" wrap="wrap" style={{ marginRight: '2rem' }}>
               <CustomTag>{employee.cpf}</CustomTag>
               <CustomTag>{employee.status}</CustomTag>
               <CustomTag>{employee.role}</CustomTag>

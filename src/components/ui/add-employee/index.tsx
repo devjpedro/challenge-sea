@@ -16,7 +16,12 @@ export function AddEmployee() {
         </Flex>
       }
     >
-      <SwitchInputContainer align="center" justify="space-between">
+      <SwitchInputContainer
+        align="center"
+        justify="space-between"
+        wrap="wrap"
+        gap="1rem"
+      >
         <label htmlFor="status">O trabalhador está ativo ou inativo?</label>
         <Switch checkedChildren="Ativo" unCheckedChildren="Inativo" />
       </SwitchInputContainer>

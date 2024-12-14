@@ -4,7 +4,7 @@ import { ContainerSideContent } from './styles'
 
 export function SideContent() {
   return (
-    <ContainerSideContent vertical align="start" gap={8}>
+    <ContainerSideContent>
       <Typography.Paragraph>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fringilla
         dictum hendrerit. Aliquam sed eros faucibus, tincidunt risus vitae,

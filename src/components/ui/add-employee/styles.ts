@@ -2,6 +2,7 @@ import { Card, Flex } from 'antd'
 import styled from 'styled-components'
 
 export const Container = styled(Card)`
+  width: 100%;
   flex: 2;
 
   background-color: ${(props) => props.theme.colors.white};
@@ -24,6 +25,10 @@ export const Container = styled(Card)`
       font-size: 1.75rem !important;
       font-weight: 400 !important;
       margin: 0;
+
+      @media (max-width: 575px) {
+        font-size: 1.25rem !important;
+      }
     }
   }
 `
