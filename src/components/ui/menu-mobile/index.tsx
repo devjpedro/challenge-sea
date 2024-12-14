@@ -1,17 +1,18 @@
 import { Drawer, Flex } from 'antd'
 import { useState } from 'react'
 import { FaBars } from 'react-icons/fa'
+import { useLocation, useNavigate } from 'react-router'
 
 import { NavItemBtn, TriggerMenu } from './styles'
 
 const navItems = [
   {
     label: 'Início',
-    href: '',
+    href: 'inicio',
   },
   {
-    label: 'Editar',
-    href: 'editar',
+    label: 'Itens',
+    href: 'itens',
   },
   {
     label: 'Fluxos',
@@ -33,7 +34,14 @@ const navItems = [
 
 export function MenuMobile() {
   const [open, setOpen] = useState(false)
-  const [active, setActive] = useState('editar')
+
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const selectedKey =
+    navItems.find((item) =>
+      location.pathname.replace('/', '').startsWith(item.href),
+    )?.href ?? 'inicio'
 
   const showDrawer = () => {
     setOpen(true)
@@ -41,6 +49,11 @@ export function MenuMobile() {
 
   const onClose = () => {
     setOpen(false)
+  }
+
+  const handleClickItem = (href: string) => {
+    onClose()
+    navigate(`/${href}`)
   }
 
   return (
@@ -56,9 +69,10 @@ export function MenuMobile() {
           {navItems.map((item) => (
             <NavItemBtn
               key={item.label}
-              type={active === item.href ? 'primary' : 'default'}
-              variant={active === item.href ? 'solid' : 'outlined'}
+              type={selectedKey === item.href ? 'primary' : 'default'}
+              variant={selectedKey === item.href ? 'solid' : 'outlined'}
               color="primary"
+              onClick={() => handleClickItem(item.href)}
             >
               {item.label}
             </NavItemBtn>

@@ -7,7 +7,7 @@ import { EmployeeHealthCertificateForm } from '../../../components/form/employee
 import { EmployeePersonalDataForm } from '../../../components/form/employee-personal-data'
 import { Container, SwitchInputContainer } from './styles'
 
-export function AddEmployee() {
+export function EditEmployee() {
   const navigate = useNavigate()
 
   const handleClickBack = () => {
@@ -23,7 +23,7 @@ export function AddEmployee() {
             style={{ cursor: 'pointer' }}
             onClick={handleClickBack}
           />
-          <Typography.Title level={2}>Adicionar Funcionário</Typography.Title>
+          <Typography.Title level={2}>Editar Funcionário</Typography.Title>
         </Flex>
       }
     >

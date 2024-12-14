@@ -1,5 +1,6 @@
-import { Button, Flex, type MenuProps, Typography } from 'antd'
+import { Button, Flex, Typography } from 'antd'
 import { FaEllipsisH, FaPlus } from 'react-icons/fa'
+import { useNavigate } from 'react-router'
 
 import {
   AddEmployeeBtn,
@@ -41,27 +42,24 @@ const employeeData = [
   },
 ]
 
-const items: MenuProps['items'] = [
-  {
-    label: 'Alterar',
-    key: '1',
-  },
-  {
-    type: 'divider',
-  },
-  {
-    label: 'Excluir',
-    key: '2',
-  },
-]
-
 export function ListEmployee() {
+  const navigate = useNavigate()
+
+  const handleClickAddEmployee = () => {
+    navigate('/itens/1/adicionar')
+  }
+
+  const handleClickEditEmployee = (name: string) => {
+    navigate(`/itens/1/editar/?name=${name}`)
+  }
+
   return (
     <Container title="Funcionário (s)">
       <AddEmployeeBtn
         variant="outlined"
         color="primary"
         icon={<FaPlus size={10} />}
+        onClick={handleClickAddEmployee}
       >
         Adicionar Funcionário
       </AddEmployeeBtn>
@@ -106,7 +104,22 @@ export function ListEmployee() {
             </Flex>
 
             <CustomDropdown
-              menu={{ items }}
+              menu={{
+                items: [
+                  {
+                    label: 'Alterar',
+                    key: '1',
+                    onClick: () => handleClickEditEmployee(employee.name),
+                  },
+                  {
+                    type: 'divider',
+                  },
+                  {
+                    label: 'Excluir',
+                    key: '2',
+                  },
+                ],
+              }}
               trigger={['click']}
               placement="bottom"
               arrow

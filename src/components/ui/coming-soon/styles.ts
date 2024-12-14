@@ -24,5 +24,9 @@ export const ComingSoonContainer = styled(Flex)<ComingSoonContainerProps>`
     props.layout === 'blank' &&
     `
     margin: 1.5rem 2rem 0 5.75rem;
+
+    @media (max-width: 768px) {
+      margin: 4rem 1.25rem !important;
+    }
   `}
 `
