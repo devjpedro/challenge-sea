@@ -1,16 +1,9 @@
 import { Layout } from 'antd'
+import { Outlet } from 'react-router'
 
-import { ListEmployee } from '../../ui/list-employee'
 import { MenuMobile } from '../../ui/menu-mobile'
 import { NavSidebar } from '../../ui/nav-sidebar'
-import { SideContent } from '../../ui/side-content'
-import { StepsHeader } from '../../ui/steps-header'
-import {
-  ContentLayout,
-  CustomContent,
-  CustomHeader,
-  CustomSider,
-} from './styles'
+import { CustomSider } from './styles'
 
 export function DashboardLayout() {
   return (
@@ -31,17 +24,7 @@ export function DashboardLayout() {
 
       <MenuMobile />
 
-      <ContentLayout>
-        <CustomHeader>
-          <StepsHeader />
-        </CustomHeader>
-        <CustomContent>
-          <SideContent />
-          {/* <AddEmployee /> */}
-          <ListEmployee />
-          {/* <MainContent /> */}
-        </CustomContent>
-      </ContentLayout>
+      <Outlet />
     </Layout>
   )
 }

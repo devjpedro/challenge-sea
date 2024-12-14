@@ -1,9 +1,9 @@
 import { Button, Flex, Switch, Typography } from 'antd'
 import { FaArrowLeft } from 'react-icons/fa6'
 
-import { EmployeeActivityInformationForm } from '../../form/employee-activity-information'
-import { EmployeeHealthCertificateForm } from '../../form/employee-health-certificate'
-import { EmployeePersonalDataForm } from '../../form/employee-personal-data'
+import { EmployeeActivityInformationForm } from '../../../components/form/employee-activity-information'
+import { EmployeeHealthCertificateForm } from '../../../components/form/employee-health-certificate'
+import { EmployeePersonalDataForm } from '../../../components/form/employee-personal-data'
 import { Container, SwitchInputContainer } from './styles'
 
 export function AddEmployee() {

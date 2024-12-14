@@ -108,7 +108,7 @@ export function ListEmployee() {
             <CustomDropdown
               menu={{ items }}
               trigger={['click']}
-              placement="bottomCenter"
+              placement="bottom"
               arrow
             >
               <FaEllipsisH size={20} />
