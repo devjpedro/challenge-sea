@@ -1,12 +1,8 @@
 import { Layout } from 'antd'
 import styled from 'styled-components'
 
-export const ContentLayout = styled(Layout)`
-  padding: 2rem;
-`
-
 export const CustomSider = styled(Layout.Sider)`
-  position: relative;
+  position: fixed;
 
   height: 100vh;
 
@@ -15,6 +11,11 @@ export const CustomSider = styled(Layout.Sider)`
   min-width: 60px !important;
 
   flex: auto !important;
+`
+
+export const ContentLayout = styled(Layout)`
+  padding: 2rem;
+  margin-left: 3.75rem;
 `
 
 export const CustomHeader = styled(Layout.Header)`
