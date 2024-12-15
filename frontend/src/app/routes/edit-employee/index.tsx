@@ -211,8 +211,9 @@ export function EditEmployee() {
             variant="outlined"
             color="primary"
             htmlType="submit"
+            loading={form.formState.isSubmitting}
           >
-            Salvar
+            {form.formState.isSubmitting ? 'Salvando...' : 'Salvar'}
           </Button>
         </Form>
       </FormProvider>

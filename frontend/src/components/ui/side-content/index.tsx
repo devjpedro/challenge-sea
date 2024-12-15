@@ -1,5 +1,6 @@
 import { Typography } from 'antd'
 
+import EmployeePhoto from '../../../assets/employee-photo.png'
 import { ContainerSideContent } from './styles'
 
 export function SideContent() {
@@ -18,7 +19,7 @@ export function SideContent() {
         dis parturient montes, nascetur ridiculus mus.
       </Typography.Paragraph>
 
-      <img src="https://placehold.co/200x200" alt="Foto Ilustrativa" />
+      <img src={EmployeePhoto} alt="Foto Ilustrativa" />
     </ContainerSideContent>
   )
 }

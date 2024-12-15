@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form'
 import { FormItem } from 'react-hook-form-antd'
 
 import type { EmployeeForm } from '../../../validations/employee-schema'
-import { CustomLabel, EmployeeInformationContainer } from './styled'
+import { CustomLabel, EmployeeInformationContainer } from './styles'
 
 export function EmployeePersonalDataForm() {
   const {
@@ -48,6 +48,7 @@ export function EmployeePersonalDataForm() {
           <FormItem control={control} name="personalData.cpf">
             <Input placeholder="CPF" id="cpf" />
           </FormItem>
+          {/* </Controller> */}
         </Col>
         <Col xs={24} sm={12}>
           <CustomLabel htmlFor="birthday">Data de Nascimento</CustomLabel>

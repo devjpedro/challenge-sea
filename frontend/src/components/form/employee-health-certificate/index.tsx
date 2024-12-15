@@ -5,7 +5,7 @@ import { FaPaperclip } from 'react-icons/fa'
 
 import { defaultTheme } from '../../../styles/defaultTheme'
 import type { EmployeeForm } from '../../../validations/employee-schema'
-import { EmployeeActivityContainer } from './styled'
+import { EmployeeActivityContainer } from './styles'
 
 export function EmployeeHealthCertificateForm() {
   const { control, setValue, watch } = useFormContext<EmployeeForm>()

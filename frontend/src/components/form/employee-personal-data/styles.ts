@@ -54,6 +54,11 @@ export const EmployeeInformationContainer = styled(Flex)`
     margin-left: 0.25rem;
     margin-top: 0.125rem;
   }
+
+  @media (max-width: 768px) {
+    align-items: center;
+    padding: 0;
+  }
 `
 
 export const CustomLabel = styled.label`

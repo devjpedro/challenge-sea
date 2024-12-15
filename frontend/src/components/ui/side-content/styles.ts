@@ -5,7 +5,7 @@ export const ContainerSideContent = styled(Card)`
   flex: 1;
 
   background-color: ${(props) => props.theme.colors.white};
-  padding: 1.5rem;
+  padding: 0 !important;
   box-shadow: ${(props) => props.theme.shadows['shadow-1']};
   border-radius: 16px;
 
@@ -20,6 +20,11 @@ export const ContainerSideContent = styled(Card)`
     display: block;
     height: 100%;
     border-radius: 12px;
+    margin-top: 1rem;
+  }
+
+  .ant-card-body {
+    padding: 1.5rem !important;
   }
 
   @media (max-width: 575px) {

@@ -8,7 +8,7 @@ import {
   EmployeeActivityContainer,
   RemoveIcon,
   SelectActivityContainer,
-} from './styled'
+} from './styles'
 
 type Epi = {
   selectedEPI: string

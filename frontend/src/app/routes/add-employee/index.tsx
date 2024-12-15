@@ -63,6 +63,7 @@ export function AddEmployee() {
     onSuccess: () => {
       message.success('Funcionário criado com sucesso!')
       queryClient.invalidateQueries('employees')
+      form.reset()
     },
     onError: (error) => {
       console.error(error)
@@ -156,8 +157,9 @@ export function AddEmployee() {
             variant="outlined"
             color="primary"
             htmlType="submit"
+            loading={form.formState.isSubmitting}
           >
-            Salvar
+            {form.formState.isSubmitting ? 'Salvando...' : 'Salvar'}
           </Button>
         </Form>
       </FormProvider>
