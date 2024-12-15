@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Employee {
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  status     Boolean
+  name       String
+  gender     String
+  cpf        String
+  birthDay   DateTime   @updatedAt
+  rg         String
+  role       String
+  activities Activity[] // Relacionamento com atividades (1:N)
+
+  @@map("employees")
+}
+
+model Activity {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  employeeId String   @db.ObjectId
+  employee   Employee @relation(fields: [employeeId], references: [id]) // Relacionamento com Employee (N:1)
+  epis       EPI[] // Relacionamento com EPI (1:N)
+
+  @@map("activities")
+}
+
+model EPI {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  caCode     String
+  activityId String   @db.ObjectId
+  activity   Activity @relation(fields: [activityId], references: [id]) // Relacionamento com Activity (N:1)
+
+  @@map("epis")
+}
