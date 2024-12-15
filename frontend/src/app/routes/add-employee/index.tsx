@@ -93,7 +93,7 @@ export function AddEmployee() {
       name: personalData.name,
       gender: personalData.gender,
       cpf: personalData.cpf,
-      birthDay: personalData.birthday?.$d.toISOString() ?? '',
+      birthDay: personalData.birthday?.toISOString() ?? '',
       rg: personalData.rg,
       role: personalData.role,
       activities: dontHasEpi ? [] : activitiesPayload,

@@ -11,16 +11,7 @@ const personalDataSchema = z.object({
     .refine((value) => cpf.isValid(value), {
       message: 'CPF inválido',
     }),
-  birthday: z
-    .object(
-      {
-        $d: z.date(),
-      },
-      {
-        message: 'Data de Nascimento é obrigatória',
-      },
-    )
-    .nullable(),
+  birthday: z.any(),
   rg: z.string().min(1, 'RG é obrigatório'),
   role: z.string().min(1, 'Cargo é obrigatório'),
 })

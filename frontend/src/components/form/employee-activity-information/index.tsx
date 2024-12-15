@@ -23,9 +23,11 @@ type Activity = {
 export function EmployeeActivityInformationForm({
   useEpi,
   setUseEpi,
+  isEdit = false,
 }: {
   useEpi: boolean
   setUseEpi: (value: boolean) => void
+  isEdit?: boolean
 }) {
   const { control, watch, setValue } = useFormContext<EmployeeForm>()
 
@@ -88,6 +90,22 @@ export function EmployeeActivityInformationForm({
     setValue('activities', updatedActivities)
   }
 
+  const resetActivities = () => {
+    if (isEdit) return
+
+    setValue('activities', [
+      {
+        activityName: '',
+        epis: [
+          {
+            selectedEPI: '',
+            caNumber: '',
+          },
+        ],
+      },
+    ])
+  }
+
   return (
     <EmployeeActivityContainer vertical gap="1.5rem">
       <Flex vertical gap="0.875rem" wrap="wrap">
@@ -99,17 +117,8 @@ export function EmployeeActivityInformationForm({
           checked={useEpi}
           onChange={(event) => {
             setUseEpi(event.target.checked)
-            setValue('activities', [
-              {
-                activityName: '',
-                epis: [
-                  {
-                    selectedEPI: '',
-                    caNumber: '',
-                  },
-                ],
-              },
-            ])
+
+            resetActivities()
           }}
         >
           O trabalhador não usa EPI.
