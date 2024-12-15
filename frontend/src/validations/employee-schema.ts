@@ -39,18 +39,16 @@ const activitySchema = z.object({
 
 // schema para adicionar/editar um funcionário
 export const employeeFormSchema = z.object({
-  status: z.enum(['active', 'inactive']),
+  status: z.boolean(),
   personalData: personalDataSchema,
-  dontUseEpi: z.boolean().optional(),
   activities: z.array(activitySchema),
   healthCertificate: z.instanceof(File).optional(),
 })
 
 // schema para adicionar/editar um funcionario sem epi
 export const employeeFormSchemaWithoutActivities = z.object({
-  status: z.enum(['active', 'inactive']),
+  status: z.boolean(),
   personalData: personalDataSchema,
-  dontUseEpi: z.boolean().optional(),
   activities: z
     .array(
       z.object({

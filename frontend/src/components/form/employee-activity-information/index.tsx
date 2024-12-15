@@ -21,11 +21,11 @@ type Activity = {
 }
 
 export function EmployeeActivityInformationForm({
-  noHasEpi,
-  setNoHasEpi,
+  useEpi,
+  setUseEpi,
 }: {
-  noHasEpi: boolean
-  setNoHasEpi: (value: boolean) => void
+  useEpi: boolean
+  setUseEpi: (value: boolean) => void
 }) {
   const { control, watch, setValue } = useFormContext<EmployeeForm>()
 
@@ -96,9 +96,9 @@ export function EmployeeActivityInformationForm({
         </Typography.Title>
 
         <Checkbox
-          checked={noHasEpi}
+          checked={useEpi}
           onChange={(event) => {
-            setNoHasEpi(event.target.checked)
+            setUseEpi(event.target.checked)
             setValue('activities', [
               {
                 activityName: '',
@@ -116,7 +116,7 @@ export function EmployeeActivityInformationForm({
         </Checkbox>
       </Flex>
 
-      {!noHasEpi && !!activites?.length && (
+      {!useEpi && !!activites?.length && (
         <>
           <Flex vertical gap="large">
             {activites.map((activity, index) => (
@@ -138,11 +138,11 @@ export function EmployeeActivityInformationForm({
                       placeholder="Atividade"
                       id="activity"
                       options={[
-                        { value: 'atividade-1', label: 'Atividade 1' },
-                        { value: 'atividade-2', label: 'Atividade 2' },
-                        { value: 'atividade-3', label: 'Atividade 3' },
-                        { value: 'atividade-4', label: 'Atividade 4' },
-                        { value: 'atividade-5', label: 'Atividade 5' },
+                        { value: 'Atividade 1', label: 'Atividade 1' },
+                        { value: 'Atividade 2', label: 'Atividade 2' },
+                        { value: 'Atividade 3', label: 'Atividade 3' },
+                        { value: 'Atividade 4', label: 'Atividade 4' },
+                        { value: 'Atividade 5', label: 'Atividade 5' },
                       ]}
                     />
                   </FormItem>
@@ -165,40 +165,40 @@ export function EmployeeActivityInformationForm({
                             id="epi"
                             options={[
                               {
-                                value: 'capacete-seguranca',
+                                value: 'Capacete de Segurança',
                                 label: 'Capacete de Segurança',
                               },
                               {
-                                value: 'oculos-seguranca',
+                                value: 'Óculos de Segurança',
                                 label: 'Óculos de Segurança',
                               },
                               {
-                                value: 'protetor-auricular',
+                                value: 'Protetor Auricular',
                                 label: 'Protetor Auricular',
                               },
-                              { value: 'respirador', label: 'Respirador' },
+                              { value: 'Respirador', label: 'Respirador' },
                               {
-                                value: 'luva-seguranca',
+                                value: 'Luva de Segurança',
                                 label: 'Luva de Segurança',
                               },
                               {
-                                value: 'botina-seguranca',
+                                value: 'Botina de Segurança',
                                 label: 'Botina de Segurança',
                               },
                               {
-                                value: 'avental-protecao',
+                                value: 'Avental de Proteção',
                                 label: 'Avental de Proteção',
                               },
                               {
-                                value: 'cinto-seguranca',
+                                value: 'Cinto de Segurança',
                                 label: 'Cinto de Segurança',
                               },
                               {
-                                value: 'mascara-solda',
+                                value: 'Máscara de Solda',
                                 label: 'Máscara de Solda',
                               },
                               {
-                                value: 'viseira-facial',
+                                value: 'Viseira Facial',
                                 label: 'Viseira Facial',
                               },
                             ]}

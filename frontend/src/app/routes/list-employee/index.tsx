@@ -1,7 +1,12 @@
-import { Button, Flex, Typography } from 'antd'
+import { Button, Flex, message, Typography } from 'antd'
+import { useState } from 'react'
 import { FaEllipsisH, FaPlus } from 'react-icons/fa'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router'
+import { mask } from 'remask'
 
+import { deleteEmployee } from '../../../api/delete-employee'
+import { getEmployees } from '../../../api/get-employees'
 import {
   AddEmployeeBtn,
   CardEmployee,
@@ -11,46 +16,55 @@ import {
   FlexContainerBtns,
 } from './styles'
 
-const employeeData = [
-  {
-    id: 1,
-    name: 'Daniel Alves da Silva',
-    cpf: '000.000.000-99',
-    status: 'Ativo',
-    role: 'Cargo 1',
-  },
-  {
-    id: 2,
-    name: 'Giselle Torres Lopes',
-    cpf: '000.000.000-88',
-    status: 'Inativo',
-    role: 'Cargo 2',
-  },
-  {
-    id: 3,
-    name: 'Ana Bispo dos Santos',
-    cpf: '000.000.000-99',
-    status: 'Inativo',
-    role: 'Cargo 1',
-  },
-  {
-    id: 4,
-    name: 'Regina Elisa Souza',
-    cpf: '000.000.000-99',
-    status: 'Ativo',
-    role: 'Cargo 3',
-  },
-]
-
 export function ListEmployee() {
+  // states
+  const [onlyActives, setOnlyActives] = useState(false)
+
+  // hooks
   const navigate = useNavigate()
 
+  const queryClient = useQueryClient()
+
+  const { data: result, isLoading: isLoadingEmployees } = useQuery({
+    queryKey: ['employees'],
+    queryFn: () => getEmployees(),
+    staleTime: 1000 * 60 * 1, // revalida a cada 1 minuto
+    refetchOnWindowFocus: false,
+    cacheTime: 1000 * 60 * 5, // mantém em cache por 5 minutos
+  })
+
+  const { mutateAsync: deleteEmployeeFn } = useMutation({
+    mutationFn: deleteEmployee,
+    onSuccess: (data) => {
+      message.success(data.message)
+      queryClient.invalidateQueries(['employees'])
+    },
+    onError: (error) => {
+      console.error(error)
+      message.error('Erro ao remover funcionário')
+    },
+  })
+
+  // vars
+  const employees = onlyActives
+    ? result?.filter((employee) => employee.status)
+    : result
+
+  // funcs
   const handleClickAddEmployee = () => {
     navigate('/itens/1/adicionar')
   }
 
   const handleClickEditEmployee = (name: string) => {
     navigate(`/itens/1/editar/?name=${name}`)
+  }
+
+  const handleClickDeleteEmployee = async (id: string) => {
+    await deleteEmployeeFn(id)
+  }
+
+  const handleClickFilter = () => {
+    setOnlyActives((prev) => !prev)
   }
 
   return (
@@ -72,63 +86,91 @@ export function ListEmployee() {
         wrap="wrap"
       >
         <FlexContainerBtns gap="large" align="center" wrap="wrap">
-          <Button variant="outlined" color="primary" size="large">
+          <Button
+            variant="outlined"
+            color="primary"
+            size="large"
+            disabled={onlyActives}
+            onClick={handleClickFilter}
+          >
             Ver apenas ativos
           </Button>
-          <Button variant="outlined" color="primary" size="large" disabled>
+          <Button
+            variant="outlined"
+            color="primary"
+            size="large"
+            disabled={!onlyActives}
+            onClick={handleClickFilter}
+          >
             Limpar Filtros
           </Button>
         </FlexContainerBtns>
 
         <Typography.Text style={{ fontSize: '1rem', fontWeight: '500' }}>
-          Ativos 2/4
+          Ativos {result?.filter((item) => item.status).length ?? 0}/
+          {result?.length ?? 0}
         </Typography.Text>
       </Flex>
 
-      <Flex vertical justify="center" gap="large" style={{ marginTop: '3rem' }}>
-        {employeeData.map((employee) => (
-          <CardEmployee
-            key={employee.id}
-            vertical
-            gap="0.25rem"
-            status={employee.status}
-            wrap="wrap"
-          >
-            <Typography.Text className="name-user">
-              {employee.name}
-            </Typography.Text>
-            <Flex gap="small" wrap="wrap" style={{ marginRight: '2rem' }}>
-              <CustomTag>{employee.cpf}</CustomTag>
-              <CustomTag>{employee.status}</CustomTag>
-              <CustomTag>{employee.role}</CustomTag>
-            </Flex>
+      {isLoadingEmployees ? (
+        <Flex justify="center" align="center" style={{ marginTop: '3rem' }}>
+          <Typography.Title level={4}>
+            Carregando funcionários...
+          </Typography.Title>
+        </Flex>
+      ) : (
+        <Flex
+          vertical
+          justify="center"
+          gap="large"
+          style={{ marginTop: '3rem' }}
+        >
+          {!!employees &&
+            employees.map((employee) => (
+              <CardEmployee
+                key={employee.id}
+                vertical
+                gap="0.25rem"
+                status={employee.status ? 'Ativo' : 'Inativo'}
+                wrap="wrap"
+              >
+                <Typography.Text className="name-user">
+                  {employee.name}
+                </Typography.Text>
+                <Flex gap="small" wrap="wrap" style={{ marginRight: '2rem' }}>
+                  <CustomTag>{mask(employee.cpf, '999.999.999-99')}</CustomTag>
+                  <CustomTag>{employee.status ? 'Ativo' : 'Inativo'}</CustomTag>
+                  <CustomTag>{employee.role}</CustomTag>
+                </Flex>
 
-            <CustomDropdown
-              menu={{
-                items: [
-                  {
-                    label: 'Alterar',
-                    key: '1',
-                    onClick: () => handleClickEditEmployee(employee.name),
-                  },
-                  {
-                    type: 'divider',
-                  },
-                  {
-                    label: 'Excluir',
-                    key: '2',
-                  },
-                ],
-              }}
-              trigger={['click']}
-              placement="bottom"
-              arrow
-            >
-              <FaEllipsisH size={20} />
-            </CustomDropdown>
-          </CardEmployee>
-        ))}
-      </Flex>
+                <CustomDropdown
+                  menu={{
+                    items: [
+                      {
+                        label: 'Alterar',
+                        key: '1',
+                        onClick: () => handleClickEditEmployee(employee.name),
+                      },
+                      {
+                        type: 'divider',
+                      },
+                      {
+                        label: 'Excluir',
+                        key: '2',
+                        onClick: () => handleClickDeleteEmployee(employee.id),
+                      },
+                    ],
+                  }}
+                  trigger={['click']}
+                  placement="bottom"
+                  arrow
+                >
+                  <FaEllipsisH size={20} />
+                </CustomDropdown>
+              </CardEmployee>
+            ))}
+        </Flex>
+      )}
     </Container>
   )
 }

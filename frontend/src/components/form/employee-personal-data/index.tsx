@@ -84,14 +84,14 @@ export function EmployeePersonalDataForm() {
             <Select
               size="large"
               placeholder="Cargo"
-              defaultValue="cargo-1"
+              defaultValue="Cargo 1"
               id="role"
               options={[
-                { value: 'cargo-1', label: 'Cargo 1' },
-                { value: 'cargo-2', label: 'Cargo 2' },
-                { value: 'cargo-3', label: 'Cargo 3' },
-                { value: 'cargo-4', label: 'Cargo 4' },
-                { value: 'cargo-5', label: 'Cargo 5' },
+                { value: 'Cargo 1', label: 'Cargo 1' },
+                { value: 'Cargo 2', label: 'Cargo 2' },
+                { value: 'Cargo 3', label: 'Cargo 3' },
+                { value: 'Cargo 4', label: 'Cargo 4' },
+                { value: 'Cargo 5', label: 'Cargo 5' },
               ]}
             />
           </FormItem>

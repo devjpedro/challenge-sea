@@ -1,10 +1,16 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Flex, Form, Switch, Typography } from 'antd'
+import { Button, Flex, Form, message, Switch, Typography } from 'antd'
 import { useState } from 'react'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { FaArrowLeft } from 'react-icons/fa6'
+import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router'
 
+import {
+  type ActivitiesPayload,
+  createEmployee,
+  type CreateEmployeesRequest,
+} from '../../../api/create-employee'
 import { EmployeeActivityInformationForm } from '../../../components/form/employee-activity-information'
 import { EmployeeHealthCertificateForm } from '../../../components/form/employee-health-certificate'
 import { EmployeePersonalDataForm } from '../../../components/form/employee-personal-data'
@@ -16,16 +22,19 @@ import {
 import { Container, SwitchInputContainer } from './styles'
 
 export function AddEmployee() {
-  const [noHasEpi, setNoHasEpi] = useState(false)
+  // States
+  const [dontHasEpi, setDontHasEpi] = useState(false)
 
+  // Hooks
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
 
   const form = useForm<EmployeeForm>({
     resolver: zodResolver(
-      noHasEpi ? employeeFormSchemaWithoutActivities : employeeFormSchema,
+      dontHasEpi ? employeeFormSchemaWithoutActivities : employeeFormSchema,
     ),
     defaultValues: {
-      status: 'inactive',
+      status: false,
       personalData: {
         name: '',
         birthday: undefined,
@@ -34,7 +43,6 @@ export function AddEmployee() {
         rg: '',
         role: '',
       },
-      dontUseEpi: false,
       activities: [
         {
           activityName: '',
@@ -50,8 +58,48 @@ export function AddEmployee() {
     },
   })
 
-  const onSubmitFn = (data: EmployeeForm) => {
-    console.log(data)
+  const { mutateAsync: createEmployeeFn } = useMutation({
+    mutationFn: createEmployee,
+    onSuccess: () => {
+      message.success('Funcionário criado com sucesso!')
+      queryClient.invalidateQueries('employees')
+    },
+    onError: (error) => {
+      console.error(error)
+      message.error('Erro ao criar funcionário. Tente novamente mais tarde.')
+    },
+  })
+
+  // Funcs
+  const onSubmitFn = async ({
+    status,
+    personalData,
+    activities,
+  }: EmployeeForm) => {
+    const activitiesPayload: ActivitiesPayload[] = activities?.length
+      ? activities.map((activity) => ({
+          name: activity.activityName ?? '',
+          epis: activity.epis?.length
+            ? activity.epis.map((epi) => ({
+                name: epi.selectedEPI ?? '',
+                caCode: epi.caNumber ?? '',
+              }))
+            : [],
+        }))
+      : []
+
+    const payload: CreateEmployeesRequest = {
+      status,
+      name: personalData.name,
+      gender: personalData.gender,
+      cpf: personalData.cpf,
+      birthDay: personalData.birthday?.$d.toISOString() ?? '',
+      rg: personalData.rg,
+      role: personalData.role,
+      activities: dontHasEpi ? [] : activitiesPayload,
+    }
+
+    await createEmployeeFn(payload)
   }
 
   const handleClickBack = () => {
@@ -89,10 +137,8 @@ export function AddEmployee() {
                 <Switch
                   checkedChildren="Ativo"
                   unCheckedChildren="Inativo"
-                  checked={field.value === 'active'}
-                  onChange={(value) =>
-                    field.onChange(value ? 'active' : 'inactive')
-                  }
+                  checked={field.value}
+                  onChange={(value) => field.onChange(value)}
                 />
               </SwitchInputContainer>
             )}
@@ -100,8 +146,8 @@ export function AddEmployee() {
 
           <EmployeePersonalDataForm />
           <EmployeeActivityInformationForm
-            noHasEpi={noHasEpi}
-            setNoHasEpi={setNoHasEpi}
+            useEpi={dontHasEpi}
+            setUseEpi={setDontHasEpi}
           />
           <EmployeeHealthCertificateForm />
           <Button

@@ -25,7 +25,7 @@ export function EditEmployee() {
       noHasEpi ? employeeFormSchemaWithoutActivities : employeeFormSchema,
     ),
     defaultValues: {
-      status: 'inactive',
+      status: false,
       personalData: {
         name: '',
         birthday: undefined,
@@ -34,7 +34,6 @@ export function EditEmployee() {
         rg: '',
         role: '',
       },
-      dontUseEpi: false,
       activities: [
         {
           activityName: '',
@@ -89,10 +88,8 @@ export function EditEmployee() {
                 <Switch
                   checkedChildren="Ativo"
                   unCheckedChildren="Inativo"
-                  checked={field.value === 'active'}
-                  onChange={(value) =>
-                    field.onChange(value ? 'active' : 'inactive')
-                  }
+                  checked={field.value}
+                  onChange={(value) => field.onChange(value)}
                 />
               </SwitchInputContainer>
             )}
