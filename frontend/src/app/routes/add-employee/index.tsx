@@ -103,7 +103,7 @@ export function AddEmployee() {
   }
 
   const handleClickBack = () => {
-    navigate('/itens/1')
+    navigate('/funcionarios/itens/1')
   }
 
   return (

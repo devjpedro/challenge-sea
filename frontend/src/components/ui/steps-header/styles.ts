@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 export const StepHeaderContainer = styled(Flex)`
   overflow-x: auto;
+  overflow-y: hidden;
   padding: 0 0.75rem;
 `
 

@@ -1,4 +1,4 @@
-import { Button, Card, Dropdown, Flex, Tag } from 'antd'
+import { Button, Card, Dropdown, Flex, Tag, Typography } from 'antd'
 import styled from 'styled-components'
 
 interface CardEmployeeProps {
@@ -116,4 +116,9 @@ export const SwitchContainer = styled(Flex)`
   margin-top: 2rem;
 
   font-size: 0.875rem;
+`
+
+export const FeedbackMessage = styled(Typography.Title)`
+  color: ${(props) => props.theme.colors['gray-500']} !important;
+  font-weight: 500 !important;
 `

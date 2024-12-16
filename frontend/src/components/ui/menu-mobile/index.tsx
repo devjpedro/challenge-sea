@@ -12,7 +12,7 @@ const navItems = [
   },
   {
     label: 'Itens',
-    href: 'itens',
+    href: 'funcionarios/itens',
   },
   {
     label: 'Fluxos',

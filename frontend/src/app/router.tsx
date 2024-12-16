@@ -13,16 +13,25 @@ export function Router() {
   return (
     <Routes>
       <Route path="/" element={<DashboardLayout />}>
-        <Route path="/" element={<Navigate to="/itens/1" />} />
-        <Route path="/itens" element={<Navigate to="/itens/1" />} />
+        <Route path="/" element={<Navigate to="/funcionarios/itens/1" />} />
+        <Route
+          path="/funcionarios/itens"
+          element={<Navigate to="/funcionarios/itens/1" />}
+        />
 
-        <Route path="/itens" element={<EmployeesLayout />}>
-          <Route path="/itens/1" element={<ListEmployee />} />
+        <Route path="/funcionarios/itens" element={<EmployeesLayout />}>
+          <Route path="/funcionarios/itens/1" element={<ListEmployee />} />
 
-          <Route path="/itens/1" element={<ListEmployee />} />
+          <Route path="/funcionarios/itens/1" element={<ListEmployee />} />
 
-          <Route path="/itens/1/adicionar" element={<AddEmployee />} />
-          <Route path="/itens/1/editar" element={<EditEmployee />} />
+          <Route
+            path="/funcionarios/itens/1/adicionar"
+            element={<AddEmployee />}
+          />
+          <Route
+            path="/funcionarios/itens/1/editar"
+            element={<EditEmployee />}
+          />
           <Route path="*" element={<ComingSoon />} />
         </Route>
 
@@ -34,7 +43,7 @@ export function Router() {
           />
         ))}
 
-        <Route path="*" element={<Navigate to="/itens/1" />} />
+        <Route path="*" element={<Navigate to="/funcionarios/itens/1" />} />
       </Route>
     </Routes>
   )

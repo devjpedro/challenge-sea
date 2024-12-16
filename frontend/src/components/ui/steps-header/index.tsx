@@ -17,7 +17,7 @@ export function StepsHeader() {
   const handleClickStep = (stepId: number) => {
     if (isStepCompleted(stepId) || stepId <= activeStepId) {
       setActiveStep(stepId)
-      navigate(`/itens/${stepId}`)
+      navigate(`/funcionarios/itens/${stepId}`)
     }
   }
 

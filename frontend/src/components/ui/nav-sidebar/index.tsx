@@ -17,9 +17,9 @@ const navItems = [
     label: 'Início',
   },
   {
-    key: 'itens',
+    key: 'funcionarios/itens',
     icon: <FaEdit size={20} />,
-    label: 'Itens',
+    label: 'Funcionários',
   },
   {
     key: 'fluxos',
@@ -53,7 +53,7 @@ export function NavSidebar() {
     )?.key ?? 'inicio'
 
   const handleClickNavigate = (href: string) => {
-    if (href === 'itens') {
+    if (href === 'funcionarios/itens') {
       // pra evitar uma mini quebra de layout vou verificar se a rota clicada é itens e já redirecionar pro primeiro item
       navigate(`/${href}/1`)
 

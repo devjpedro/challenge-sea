@@ -1,4 +1,4 @@
-import { Flex } from 'antd'
+import { Flex, message } from 'antd'
 import { Outlet, useLocation, useNavigate } from 'react-router'
 
 import { useSteps } from '../../../hooks/useSteps'
@@ -20,20 +20,25 @@ export function EmployeesLayout() {
   const location = useLocation()
   const navigate = useNavigate()
 
-  const isStepOne = location.pathname.startsWith('/itens/1')
+  const isStepOne = location.pathname.startsWith('/funcionarios/itens/1')
 
   const activeLastStep = activeStepId === steps.length
 
   const handleClickNextStep = () => {
     goToNextStep()
     completeStep(activeStepId)
-    navigate(`/itens/${activeStepId + 1}`)
+    navigate(`/funcionarios/itens/${activeStepId + 1}`)
   }
 
   const handlePrevNextStep = () => {
     goToPreviousStep()
     uncompleteStep(activeStepId)
-    navigate(`/itens/${activeStepId - 1}`)
+    navigate(`/funcionarios/itens/${activeStepId - 1}`)
+  }
+
+  const handleCheckCompleted = () => {
+    completeStep(activeStepId)
+    message.success('Todas as etapas foram concluídas!')
   }
 
   return (
@@ -70,11 +75,16 @@ export function EmployeesLayout() {
               </StepBtn>
             )}
             <StepBtn
-              disabled={!isStepCompleted(1) || activeLastStep}
-              onClick={handleClickNextStep}
+              disabled={
+                !isStepCompleted(1) ||
+                (activeLastStep && isStepCompleted(activeStepId))
+              }
+              onClick={
+                activeLastStep ? handleCheckCompleted : handleClickNextStep
+              }
               type="primary"
             >
-              Próximo passo
+              {activeLastStep ? 'Finalizar' : 'Próximo passo'}
             </StepBtn>
           </Flex>
         </Flex>

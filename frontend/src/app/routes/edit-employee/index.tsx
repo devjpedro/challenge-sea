@@ -124,7 +124,7 @@ export function EditEmployee() {
   }
 
   const handleClickBack = () => {
-    navigate('/itens/1')
+    navigate('/funcionarios/itens/1')
   }
 
   // Effects

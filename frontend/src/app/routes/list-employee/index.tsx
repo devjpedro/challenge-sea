@@ -14,6 +14,7 @@ import {
   Container,
   CustomDropdown,
   CustomTag,
+  FeedbackMessage,
   FlexContainerBtns,
   SwitchContainer,
 } from './styles'
@@ -53,11 +54,11 @@ export function ListEmployee() {
 
   // funcs
   const handleClickAddEmployee = () => {
-    navigate('/itens/1/adicionar')
+    navigate('/funcionarios/itens/1/adicionar')
   }
 
   const handleClickEditEmployee = (id: string) => {
-    navigate(`/itens/1/editar/?id=${id}`)
+    navigate(`/funcionarios/itens/1/editar/?id=${id}`)
   }
 
   const handleClickDeleteEmployee = async (id: string) => {
@@ -126,9 +127,15 @@ export function ListEmployee() {
 
       {isLoadingEmployees ? (
         <Flex justify="center" align="center" style={{ marginTop: '3rem' }}>
-          <Typography.Title level={4}>
+          <FeedbackMessage level={5}>
             Carregando funcionários...
-          </Typography.Title>
+          </FeedbackMessage>
+        </Flex>
+      ) : !result?.length ? (
+        <Flex justify="center" align="center" style={{ marginTop: '3rem' }}>
+          <FeedbackMessage level={5}>
+            Não há funcionários cadastrados
+          </FeedbackMessage>
         </Flex>
       ) : (
         <Flex
