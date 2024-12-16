@@ -8,16 +8,16 @@ import type { EmployeeForm } from '../../../validations/employee-schema'
 import { EmployeeActivityContainer } from './styles'
 
 export function EmployeeHealthCertificateForm() {
-  const { control, setValue, watch } = useFormContext<EmployeeForm>()
-  const fileName = watch('healthCertificate')?.name || ''
+  // Hooks
+  const { setValue, control } = useFormContext<EmployeeForm>()
 
+  // Funcs
   const uploadProps = {
-    beforeUpload: (file: File) => {
-      setValue('healthCertificate', file) // Salva o arquivo no form context
+    beforeUpload: () => {
       return false
     },
     onChange: (info: UploadChangeParam<UploadFile>) => {
-      console.log(info.fileList)
+      setValue('healthCertificate', info.fileList[0].name)
     },
   }
 
@@ -27,19 +27,13 @@ export function EmployeeHealthCertificateForm() {
         Adicione Atestado de Saúde (opcional):
       </Typography.Title>
 
-      <Controller
-        name="healthCertificate"
-        control={control}
-        rules={{
-          validate: {
-            fileRequired: (value) => (value ? true : 'Selecione um arquivo'),
-          },
-        }}
-        render={({ field, fieldState }) => (
-          <>
+      <>
+        <Controller
+          control={control}
+          name="healthCertificate"
+          render={({ field }) => (
             <Input
-              {...field}
-              value={fileName}
+              value={field.value}
               placeholder="Nenhum arquivo selecionado"
               readOnly
               suffix={
@@ -49,24 +43,19 @@ export function EmployeeHealthCertificateForm() {
                 />
               }
             />
-            <Upload {...uploadProps} showUploadList={false}>
-              <Button
-                variant="outlined"
-                color="primary"
-                size="large"
-                style={{ flex: 1, width: '100%' }}
-              >
-                Selecionar arquivo
-              </Button>
-            </Upload>
-            {fieldState?.error && (
-              <Typography.Text type="danger">
-                {fieldState.error.message}
-              </Typography.Text>
-            )}
-          </>
-        )}
-      />
+          )}
+        />
+        <Upload {...uploadProps} showUploadList={false}>
+          <Button
+            variant="outlined"
+            color="primary"
+            size="large"
+            style={{ flex: 1, width: '100%' }}
+          >
+            Selecionar arquivo
+          </Button>
+        </Upload>
+      </>
     </EmployeeActivityContainer>
   )
 }

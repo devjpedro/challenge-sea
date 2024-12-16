@@ -9,6 +9,7 @@ export interface GetEmployeesResponse {
   birthDay: string
   rg: string
   role: string
+  healthCertificate?: string
   activities: {
     id: string
     name: string

@@ -16,6 +16,7 @@ export interface UpdateEmployeesRequest {
   birthDay: string
   rg: string
   role: string
+  healthCertificate?: string
   activities: ActivitiesPayload[]
 }
 

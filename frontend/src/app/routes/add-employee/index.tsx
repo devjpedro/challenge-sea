@@ -15,9 +15,8 @@ import { EmployeeActivityInformationForm } from '../../../components/form/employ
 import { EmployeeHealthCertificateForm } from '../../../components/form/employee-health-certificate'
 import { EmployeePersonalDataForm } from '../../../components/form/employee-personal-data'
 import {
+  buildEmployeeFormSchema,
   type EmployeeForm,
-  employeeFormSchema,
-  employeeFormSchemaWithoutActivities,
 } from '../../../validations/employee-schema'
 import { Container, SwitchInputContainer } from './styles'
 
@@ -30,9 +29,7 @@ export function AddEmployee() {
   const navigate = useNavigate()
 
   const form = useForm<EmployeeForm>({
-    resolver: zodResolver(
-      dontHasEpi ? employeeFormSchemaWithoutActivities : employeeFormSchema,
-    ),
+    resolver: zodResolver(buildEmployeeFormSchema(!dontHasEpi)),
     defaultValues: {
       status: false,
       personalData: {
@@ -76,6 +73,7 @@ export function AddEmployee() {
     status,
     personalData,
     activities,
+    healthCertificate,
   }: EmployeeForm) => {
     const activitiesPayload: ActivitiesPayload[] = activities?.length
       ? activities.map((activity) => ({
@@ -97,6 +95,7 @@ export function AddEmployee() {
       birthDay: personalData.birthday?.toISOString() ?? '',
       rg: personalData.rg,
       role: personalData.role,
+      healthCertificate,
       activities: dontHasEpi ? [] : activitiesPayload,
     }
 

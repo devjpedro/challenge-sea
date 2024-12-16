@@ -17,9 +17,8 @@ import { EmployeeActivityInformationForm } from '../../../components/form/employ
 import { EmployeeHealthCertificateForm } from '../../../components/form/employee-health-certificate'
 import { EmployeePersonalDataForm } from '../../../components/form/employee-personal-data'
 import {
+  buildEmployeeFormSchema,
   type EmployeeForm,
-  employeeFormSchema,
-  employeeFormSchemaWithoutActivities,
 } from '../../../validations/employee-schema'
 import { Container, SwitchInputContainer } from './styles'
 
@@ -33,9 +32,8 @@ export function EditEmployee() {
   const [searchParams] = useSearchParams()
 
   const form = useForm<EmployeeForm>({
-    resolver: zodResolver(
-      noHasEpi ? employeeFormSchemaWithoutActivities : employeeFormSchema,
-    ),
+    resolver: zodResolver(buildEmployeeFormSchema(!noHasEpi)),
+
     defaultValues: {
       status: false,
       personalData: {
@@ -93,6 +91,7 @@ export function EditEmployee() {
     personalData,
     status,
     activities,
+    healthCertificate,
   }: EmployeeForm) => {
     const activitiesPayload: ActivitiesPayload[] = activities?.length
       ? activities.map((activity) => ({
@@ -114,6 +113,7 @@ export function EditEmployee() {
       birthDay: personalData.birthday?.toISOString() ?? '',
       rg: personalData.rg,
       role: personalData.role,
+      healthCertificate,
       activities: noHasEpi ? [] : activitiesPayload,
     }
 
@@ -141,6 +141,10 @@ export function EditEmployee() {
     form.setValue('personalData.rg', selectedEmployee?.rg)
     form.setValue('personalData.role', selectedEmployee?.role)
     form.setValue('personalData.birthday', dayjs(selectedEmployee?.birthDay))
+
+    if (selectedEmployee.healthCertificate) {
+      form.setValue('healthCertificate', selectedEmployee.healthCertificate)
+    }
 
     if (!selectedEmployee.activities.length) {
       setNoHasEpi(true)

@@ -4,7 +4,6 @@ import styled from 'styled-components'
 export const ContentLayout = styled(Layout)`
   padding: 2rem;
   margin-left: 3.75rem;
-  height: 100vh;
 
   @media (max-width: 768px) {
     margin-left: 0;

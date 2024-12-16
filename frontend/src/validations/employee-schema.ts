@@ -18,47 +18,31 @@ const personalDataSchema = z.object({
   role: z.string().min(1, 'Cargo é obrigatório'),
 })
 
-// schema de validação para os dados de EPIs do funcionário
-const epiSchema = z.object({
-  selectedEPI: z.string().min(1, 'EPI é obrigatório'),
-  caNumber: z.string().min(1, 'Número do CA é obrigatório'),
-})
-
-// schema de atividades de um funcionário
-const activitySchema = z.object({
-  activityName: z.string().min(1, 'Atividade é obrigatória'),
-  epis: z.array(epiSchema),
-})
-
-// schema para adicionar/editar um funcionário
-export const employeeFormSchema = z.object({
-  status: z.boolean(),
-  personalData: personalDataSchema,
-  activities: z.array(activitySchema),
-  healthCertificate: z.instanceof(File).optional(),
-})
-
-// schema para adicionar/editar um funcionario sem epi
-export const employeeFormSchemaWithoutActivities = z.object({
-  status: z.boolean(),
-  personalData: personalDataSchema,
-  activities: z
-    .array(
-      z.object({
-        activityName: z.string().optional(),
-        epis: z
-          .array(
+// construtor do schema geral
+export const buildEmployeeFormSchema = (hasEpi: boolean) => {
+  return z.object({
+    status: z.boolean(),
+    personalData: personalDataSchema,
+    activities: z
+      .array(
+        z.object({
+          activityName: z
+            .string()
+            .min(hasEpi ? 1 : 0, 'Atividade é obrigatória'),
+          epis: z.array(
             z.object({
-              selectedEPI: z.string().optional(),
-              caNumber: z.string().optional(),
+              selectedEPI: z.string().min(hasEpi ? 1 : 0, 'EPI é obrigatório'),
+              caNumber: z
+                .string()
+                .min(hasEpi ? 1 : 0, 'Número do CA é obrigatório'),
             }),
-          )
-          .optional(),
-      }),
-    )
-    .optional(),
-  healthCertificate: z.instanceof(File).optional(),
-})
+          ),
+        }),
+      )
+      .optional(),
+    healthCertificate: z.string().optional(),
+  })
+}
 
 // tipagem do schema
-export type EmployeeForm = z.infer<typeof employeeFormSchemaWithoutActivities>
+export type EmployeeForm = z.infer<ReturnType<typeof buildEmployeeFormSchema>>
