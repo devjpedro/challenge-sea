@@ -27,8 +27,28 @@ export const CustomButtonStep = styled(Button)<CustomButtonStepProps>`
 
 export const StyledLabel = styled(Typography.Text)`
   font-weight: 500;
+  line-height: 1;
+  font-size: 0.875rem;
 
   &:not(.ant-typography-disabled) {
     color: ${(props) => props.theme.colors.primaryColor} !important;
   }
+`
+
+interface StepCompleteLabelProps {
+  isComplete: boolean
+}
+
+export const StepCompleteLabel = styled(
+  Typography.Text,
+)<StepCompleteLabelProps>`
+  line-height: 1;
+
+  font-weight: 500;
+  font-size: 0.875rem;
+
+  opacity: ${(props) => (props.isComplete ? 1 : 0)};
+  visibility: ${(props) => (props.isComplete ? 'visible' : 'hidden')};
+
+  color: ${(props) => props.theme.colors['black-500']};
 `
