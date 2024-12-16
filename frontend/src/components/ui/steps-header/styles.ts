@@ -6,7 +6,11 @@ export const StepHeaderContainer = styled(Flex)`
   padding: 0 0.75rem;
 `
 
-export const CustomButtonStep = styled(Button)`
+interface CustomButtonStepProps {
+  selected: boolean
+}
+
+export const CustomButtonStep = styled(Button)<CustomButtonStepProps>`
   width: 56px !important;
   height: 56px !important;
 
@@ -17,7 +21,7 @@ export const CustomButtonStep = styled(Button)`
   box-shadow: ${(props) => props.theme.shadows['shadow-3']};
 
   &:not(:disabled) {
-    border: 2px solid #202020;
+    border: 2px solid ${(props) => (props.selected ? '#202020' : 'transparent')};
   }
 `
 

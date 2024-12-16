@@ -1,4 +1,4 @@
-import { Button, Flex, message, Typography } from 'antd'
+import { Button, Flex, message, Switch, Typography } from 'antd'
 import { useState } from 'react'
 import { FaEllipsisH, FaPlus } from 'react-icons/fa'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
@@ -7,6 +7,7 @@ import { mask } from 'remask'
 
 import { deleteEmployee } from '../../../api/delete-employee'
 import { getEmployees } from '../../../api/get-employees'
+import { useSteps } from '../../../hooks/useSteps'
 import {
   AddEmployeeBtn,
   CardEmployee,
@@ -14,17 +15,17 @@ import {
   CustomDropdown,
   CustomTag,
   FlexContainerBtns,
+  SwitchContainer,
 } from './styles'
 
 export function ListEmployee() {
-  // states
+  const { completeStep, uncompleteStep, activeStep } = useSteps()
+
   const [onlyActives, setOnlyActives] = useState(false)
+  const [isCompleted, setIsCompleted] = useState(activeStep?.completed ?? false)
 
-  // hooks
   const navigate = useNavigate()
-
   const queryClient = useQueryClient()
-
   const { data: result, isLoading: isLoadingEmployees } = useQuery({
     queryKey: ['employees'],
     queryFn: () => getEmployees(),
@@ -55,8 +56,8 @@ export function ListEmployee() {
     navigate('/itens/1/adicionar')
   }
 
-  const handleClickEditEmployee = (name: string) => {
-    navigate(`/itens/1/editar/?name=${name}`)
+  const handleClickEditEmployee = (id: string) => {
+    navigate(`/itens/1/editar/?id=${id}`)
   }
 
   const handleClickDeleteEmployee = async (id: string) => {
@@ -65,6 +66,17 @@ export function ListEmployee() {
 
   const handleClickFilter = () => {
     setOnlyActives((prev) => !prev)
+  }
+
+  const handleChangeSwitch = (e: boolean) => {
+    setIsCompleted(e)
+    if (e) {
+      completeStep(1)
+
+      return
+    }
+
+    uncompleteStep(1)
   }
 
   return (
@@ -149,7 +161,7 @@ export function ListEmployee() {
                       {
                         label: 'Alterar',
                         key: '1',
-                        onClick: () => handleClickEditEmployee(employee.name),
+                        onClick: () => handleClickEditEmployee(employee.id),
                       },
                       {
                         type: 'divider',
@@ -171,6 +183,16 @@ export function ListEmployee() {
             ))}
         </Flex>
       )}
+
+      <SwitchContainer justify="end" align="center" gap="0.75rem">
+        <label>A etapa está concluída?</label>
+        <Switch
+          checkedChildren="Sim"
+          unCheckedChildren="Não"
+          checked={isCompleted}
+          onChange={(e) => handleChangeSwitch(e)}
+        />
+      </SwitchContainer>
     </Container>
   )
 }

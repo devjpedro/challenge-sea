@@ -111,3 +111,9 @@ export const CustomDropdown = styled(Dropdown)`
     opacity: 0.9;
   }
 `
+
+export const SwitchContainer = styled(Flex)`
+  margin-top: 2rem;
+
+  font-size: 0.875rem;
+`

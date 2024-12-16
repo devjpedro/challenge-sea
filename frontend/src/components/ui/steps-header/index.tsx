@@ -1,32 +1,37 @@
 import { Flex } from 'antd'
-import { useState } from 'react'
 import { FaBuilding } from 'react-icons/fa'
 import { useNavigate } from 'react-router'
 
+import { useSteps } from '../../../hooks/useSteps'
 import { CustomButtonStep, StepHeaderContainer, StyledLabel } from './styles'
 
 export function StepsHeader() {
-  const [unlockedSteps, setUnlockedSteps] = useState(1)
-
+  const { steps, setActiveStep, activeStepId, completeStep, isStepCompleted } =
+    useSteps()
   const navigate = useNavigate()
 
-  const handleClickStep = (index: number) => {
-    navigate(`/itens/${index}`)
+  const handleClickStep = (stepId: number) => {
+    setActiveStep(stepId)
+    completeStep(stepId)
+    navigate(`/itens/${stepId}`)
   }
+
+  isStepCompleted(2)
 
   return (
     <StepHeaderContainer gap="3rem">
-      {Array.from({ length: 9 }).map((_, index) => (
-        <Flex key={index} vertical align="center" justify="center" gap={12}>
+      {steps.map((step) => (
+        <Flex key={step.id} vertical align="center" justify="center" gap={12}>
           <CustomButtonStep
             type="primary"
             icon={<FaBuilding />}
             size="large"
-            disabled={index > unlockedSteps}
-            onClick={() => handleClickStep(index + 1)}
+            disabled={activeStepId < step.id}
+            onClick={() => handleClickStep(step.id)}
+            selected={activeStepId === step.id}
           />
-          <StyledLabel disabled={index > unlockedSteps}>
-            Item {index + 1}
+          <StyledLabel disabled={activeStepId < step.id}>
+            Item {step.id}
           </StyledLabel>
         </Flex>
       ))}

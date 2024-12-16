@@ -18,6 +18,9 @@ export function Router() {
 
         <Route path="/itens" element={<EmployeesLayout />}>
           <Route path="/itens/1" element={<ListEmployee />} />
+
+          <Route path="/itens/1" element={<ListEmployee />} />
+
           <Route path="/itens/1/adicionar" element={<AddEmployee />} />
           <Route path="/itens/1/editar" element={<EditEmployee />} />
           <Route path="*" element={<ComingSoon />} />

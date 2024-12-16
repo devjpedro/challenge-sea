@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const CustomSider = styled(Layout.Sider)`
   position: fixed;
 
-  height: 100vh;
+  height: 48rem;
 
   width: 60px !important;
   max-width: 60px !important;

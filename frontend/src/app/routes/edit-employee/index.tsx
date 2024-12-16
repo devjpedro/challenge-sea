@@ -84,11 +84,9 @@ export function EditEmployee() {
   })
 
   // Vars
-  const nameParam = searchParams.get('name')
+  const idParam = searchParams.get('id')
 
-  const selectedEmployee = result?.find(
-    (employee) => employee.name === nameParam,
-  )
+  const selectedEmployee = result?.find((employee) => employee.id === idParam)
 
   // Funcs
   const onSubmitFn = async ({

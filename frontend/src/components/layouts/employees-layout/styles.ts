@@ -1,9 +1,10 @@
-import { Layout } from 'antd'
+import { Button, Layout } from 'antd'
 import styled from 'styled-components'
 
 export const ContentLayout = styled(Layout)`
   padding: 2rem;
   margin-left: 3.75rem;
+  height: 100vh;
 
   @media (max-width: 768px) {
     margin-left: 0;
@@ -35,4 +36,10 @@ export const CustomContent = styled(Layout.Content)`
   @media (max-width: 1024px) {
     flex-direction: column;
   }
+`
+
+export const StepBtn = styled(Button)`
+  max-width: 12.5rem;
+  width: 100%;
+  border-radius: 10px;
 `
