@@ -6,7 +6,7 @@ import {
 
 class CreateEmployeeController {
   async handle(request: FastifyRequest, reply: FastifyReply) {
-    const { name, birthDay, cpf, gender, rg, role, status, activities } =
+    const { name, birthDay, cpf, gender, rg, role, status, activities, healthCertificate } =
       request.body as CreateEmployeeProps;
 
     const employeeService = new CreateEmployeeService();
@@ -20,6 +20,7 @@ class CreateEmployeeController {
       role,
       status,
       activities,
+      healthCertificate
     });
 
     reply.send(employee);

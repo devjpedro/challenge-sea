@@ -18,6 +18,7 @@ export interface CreateEmployeeProps {
   birthDay: string;
   rg: string;
   role: string;
+  healthCertificate?: string
   activities?: CreateActivityProps[];
 }
 
@@ -31,8 +32,9 @@ class CreateEmployeeService {
     rg,
     role,
     activities,
+    healthCertificate
   }: CreateEmployeeProps) {
-    const data = { status, name, cpf, gender, birthDay, rg, role };
+    const data = { status, name, cpf, gender, birthDay, rg, role, healthCertificate };
     for (const [key, value] of Object.entries(data)) {
       if (value === undefined || value === null || value === '') {
         throw new Error('Preencha todos os campos obrigatórios');
@@ -48,6 +50,7 @@ class CreateEmployeeService {
         birthDay: new Date(birthDay),
         rg,
         role,
+        healthCertificate,
         activities: activities
           ? {
               create: activities.map((activity) => ({

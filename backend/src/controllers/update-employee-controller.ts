@@ -8,7 +8,7 @@ class UpdateEmployeeController {
   async handle(request: FastifyRequest, reply: FastifyReply) {
     const { id } = request.query as { id: string };
 
-    const { name, birthDay, cpf, gender, rg, role, status, activities } =
+    const { name, birthDay, cpf, gender, rg, role, status, activities, healthCertificate } =
       request.body as UpdateEmployeeProps;
 
     const employeeService = new UpdateEmployeeService();
@@ -23,6 +23,7 @@ class UpdateEmployeeController {
       role,
       status,
       activities,
+      healthCertificate
     });
 
     reply.send(employee);

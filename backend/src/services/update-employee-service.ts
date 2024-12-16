@@ -9,6 +9,7 @@ export interface UpdateEmployeeProps {
   birthDay?: Date;
   rg?: string;
   role?: string;
+  healthCertificate?: string;
   activities?: {
     id?: string;
     name: string;
@@ -30,6 +31,7 @@ class UpdateEmployeeService {
     rg,
     role,
     activities,
+    healthCertificate
   }: UpdateEmployeeProps) {
     return await prismaClient.$transaction(async (tx) => {
       const updatedEmployee = await tx.employee.update({
@@ -42,6 +44,7 @@ class UpdateEmployeeService {
           birthDay,
           rg,
           role,
+          healthCertificate
         },
       });
 
