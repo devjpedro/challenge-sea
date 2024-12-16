@@ -1,9 +1,10 @@
 import { Layout } from 'antd'
 import { Outlet } from 'react-router'
 
+import BgImage from '../../../assets/bg-image.svg'
 import { MenuMobile } from '../../ui/menu-mobile'
 import { NavSidebar } from '../../ui/nav-sidebar'
-import { CustomSider } from './styles'
+import { CustomImageBg, CustomSider } from './styles'
 
 export function DashboardLayout() {
   return (
@@ -23,6 +24,8 @@ export function DashboardLayout() {
       </CustomSider>
 
       <MenuMobile />
+
+      <CustomImageBg src={BgImage} alt="Foto de fundo da aplicação" />
 
       <Outlet />
     </Layout>

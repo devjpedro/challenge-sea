@@ -16,3 +16,9 @@ export const CustomSider = styled(Layout.Sider)`
     display: none;
   }
 `
+
+export const CustomImageBg = styled.img`
+  position: fixed;
+  bottom: -5.5rem;
+  right: -5.5rem;
+`

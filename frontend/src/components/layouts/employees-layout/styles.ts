@@ -41,4 +41,9 @@ export const StepBtn = styled(Button)`
   max-width: 12.5rem;
   width: 100%;
   border-radius: 10px;
+
+  &:disabled {
+    background-color: ${(props) => props.theme.colors['gray-300']};
+    color: ${(props) => props.theme.colors.white};
+  }
 `

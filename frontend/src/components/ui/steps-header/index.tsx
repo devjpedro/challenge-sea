@@ -6,13 +6,11 @@ import { useSteps } from '../../../hooks/useSteps'
 import { CustomButtonStep, StepHeaderContainer, StyledLabel } from './styles'
 
 export function StepsHeader() {
-  const { steps, setActiveStep, activeStepId, completeStep, isStepCompleted } =
-    useSteps()
+  const { steps, setActiveStep, activeStepId, isStepCompleted } = useSteps()
   const navigate = useNavigate()
 
   const handleClickStep = (stepId: number) => {
     setActiveStep(stepId)
-    completeStep(stepId)
     navigate(`/itens/${stepId}`)
   }
 
