@@ -58,7 +58,7 @@ npm run start
 Entre no diretório do frontend do projeto
 
 ```bash
-cd challenge-sea/frontend
+cd frontend
 ```
 
 Instale as dependências
