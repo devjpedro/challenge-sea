@@ -35,7 +35,7 @@ npm install
 Crie o arquivo .env
 
 ```bash
-echo DATABASE_URL=mongodb+srv://devjpedro:seachallengebackjp@sea-challenge.nfbqi.mongodb.net/sea-challenge?retryWrites=true&w=majority&appName=sea-challenge > .env
+echo DATABASE_URL="mongodb+srv://devjpedro:seachallengebackjp@sea-challenge.nfbqi.mongodb.net/sea-challenge?retryWrites=true&w=majority&appName=sea-challenge" > .env
 ```
 
 Gere o schema do Prisma
