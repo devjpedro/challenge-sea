@@ -7,6 +7,21 @@ export const StepHeaderContainer = styled(Flex)`
   padding: 0 0.75rem;
 `
 
+export const StepHeaderContent = styled(Flex)`
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 98%;
+    height: 4px;
+    border-top: 4px dashed ${(props) => props.theme.colors.primaryColor};
+    margin-left: 0.5rem;
+    position: absolute;
+    top: 25%;
+  }
+`
+
 interface CustomButtonStepProps {
   selected: boolean
 }
@@ -23,6 +38,11 @@ export const CustomButtonStep = styled(Button)<CustomButtonStepProps>`
 
   &:not(:disabled) {
     border: 2px solid ${(props) => (props.selected ? '#202020' : 'transparent')};
+  }
+
+  &:disabled {
+    background-color: ${(props) => props.theme.colors['gray-200']};
+    color: ${(props) => props.theme.colors.white};
   }
 `
 

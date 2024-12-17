@@ -7,6 +7,7 @@ import {
   CustomButtonStep,
   StepCompleteLabel,
   StepHeaderContainer,
+  StepHeaderContent,
   StyledLabel,
 } from './styles'
 
@@ -22,29 +23,38 @@ export function StepsHeader() {
   }
 
   return (
-    <StepHeaderContainer gap="3rem">
-      {steps.map((step) => (
-        <Flex key={step.id} vertical align="center" justify="center" gap={8}>
-          <CustomButtonStep
-            type="primary"
-            icon={<FaBuilding />}
-            size="large"
-            disabled={!isStepCompleted(step.id) && step.id > activeStepId}
-            onClick={() => handleClickStep(step.id)}
-            selected={activeStepId === step.id}
-          />
-          <Flex vertical align="center" justify="center" gap={4}>
-            <StyledLabel
+    <StepHeaderContainer>
+      <StepHeaderContent gap="3rem">
+        {steps.map((step) => (
+          <Flex
+            key={step.id}
+            vertical
+            align="center"
+            justify="center"
+            gap={8}
+            style={{ zIndex: 2 }}
+          >
+            <CustomButtonStep
+              type="primary"
+              icon={<FaBuilding />}
+              size="large"
               disabled={!isStepCompleted(step.id) && step.id > activeStepId}
-            >
-              Item {step.id}
-            </StyledLabel>
-            <StepCompleteLabel isComplete={isStepCompleted(step.id)}>
-              Concluído
-            </StepCompleteLabel>
+              onClick={() => handleClickStep(step.id)}
+              selected={activeStepId === step.id}
+            />
+            <Flex vertical align="center" justify="center" gap={4}>
+              <StyledLabel
+                disabled={!isStepCompleted(step.id) && step.id > activeStepId}
+              >
+                Item {step.id}
+              </StyledLabel>
+              <StepCompleteLabel isComplete={isStepCompleted(step.id)}>
+                Concluído
+              </StepCompleteLabel>
+            </Flex>
           </Flex>
-        </Flex>
-      ))}
+        ))}
+      </StepHeaderContent>
     </StepHeaderContainer>
   )
 }
