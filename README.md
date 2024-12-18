@@ -5,7 +5,7 @@ Uma aplicação completa para cadastro, listagem, edição e exclusão de funcio
 
 ## 🔧 Stack Utilizada
 
-**Front-end:** React, Redux, Ant Design, Styled-Components, React Hook Form, Zod, Axios e React Query ()
+**Front-end:** React, Redux, Ant Design, Styled-Components, React Hook Form, Zod, Axios e React Query
 
 **Back-end:** Node, Fastify, Prisma e MongoDB
 
