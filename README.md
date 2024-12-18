@@ -18,16 +18,16 @@ A utilização do React Query foi para lidar com o estado das requisições de f
 
 ## 🛠️ Variáveis de Ambiente
 
-Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
+Para rodar esse projeto, você vai precisar adicionar uma variável de ambiente em cada pasta da aplicação, de acordo com as informações abaixo:
 
 
-#### Back-end
+#### /backend
 
 ```bash
 DATABASE_URL="mongodb+srv://devjpedro:seachallengebackjp@sea-challenge.nfbqi.mongodb.net/sea-challenge?retryWrites=true&w=majority&appName=sea-challenge"
 ```
 
-#### Front-end
+#### /frontend
 
 ```bash
 VITE_API_BASE_URL=http://localhost:3333
