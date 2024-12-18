@@ -1,7 +1,8 @@
-import { Button, Input, Typography, Upload, type UploadFile } from 'antd'
+import { Button, Flex, Input, Typography, Upload, type UploadFile } from 'antd'
 import type { UploadChangeParam } from 'antd/es/upload'
 import { Controller, useFormContext } from 'react-hook-form'
 import { FaPaperclip } from 'react-icons/fa'
+import { FaX } from 'react-icons/fa6'
 
 import { defaultTheme } from '../../../styles/defaultTheme'
 import type { EmployeeForm } from '../../../validations/employee-schema'
@@ -37,10 +38,21 @@ export function EmployeeHealthCertificateForm() {
               placeholder="Nenhum arquivo selecionado"
               readOnly
               suffix={
-                <FaPaperclip
-                  color={defaultTheme.colors['gray-300']}
-                  size={16}
-                />
+                <Flex align="center" gap="1rem" justify="end">
+                  <FaPaperclip
+                    color={defaultTheme.colors['gray-300']}
+                    size={16}
+                  />
+
+                  {field.value && (
+                    <FaX
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => setValue('healthCertificate', '')}
+                      color={defaultTheme.colors['gray-300']}
+                      size={16}
+                    />
+                  )}
+                </Flex>
               }
             />
           )}
