@@ -35,8 +35,9 @@ class CreateEmployeeService {
     healthCertificate
   }: CreateEmployeeProps) {
     const data = { status, name, cpf, gender, birthDay, rg, role, healthCertificate };
+
     for (const [key, value] of Object.entries(data)) {
-      if (value === undefined || value === null || value === '') {
+      if (value !== healthCertificate && (value === undefined || value === null || value === '')) {
         throw new Error('Preencha todos os campos obrigatórios');
       }
     }
