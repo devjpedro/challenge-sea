@@ -1,16 +1,39 @@
 
 # Desafio Front-end - Sea Tecnologia
 
-A aplicação se trata de um sistema de gerenciamento de funcionários. O sistema lida com a listagem de funcionários, cadastro, edição e remoção dos mesmos.
+Uma aplicação completa para cadastro, listagem, edição e exclusão de funcionários, desenvolvida com foco em desempenho e usabilidade.
 
-## Stack utilizada
+## 🔧 Stack Utilizada
 
-**Front-end:** React, Redux, Ant Design, Styled-Components, React Hook Form, Zod, Axios e React Query
+**Front-end:** React, Redux, Ant Design, Styled-Components, React Hook Form, Zod, Axios e React Query ()
 
 **Back-end:** Node, Fastify, Prisma e MongoDB
 
+A utilização do React Query foi para lidar com o estado das requisições de forma que fique mais performático, aproveitando o sistema de cache da própria biblioteca.
 
-## Rodando localmente
+## 🚀 Deploy da aplicação
+
+ - [Front-end](https://seachallenge.netlify.app)
+ - [Back-end](https://seachallengeapi.onrender.com/employees)
+
+## 🛠️ Variáveis de Ambiente
+
+Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
+
+
+#### Back-end
+
+```bash
+DATABASE_URL="mongodb+srv://devjpedro:seachallengebackjp@sea-challenge.nfbqi.mongodb.net/sea-challenge?retryWrites=true&w=majority&appName=sea-challenge"
+```
+
+#### Front-end
+
+```bash
+VITE_API_BASE_URL=http://localhost:3333
+```
+
+## 💻 Rodando localmente
 
 ### Back-end
 
@@ -78,9 +101,3 @@ Rode o projeto
 ```bash
 npm run dev
 ```
-
-
-## Deploy da aplicação
-
- - [Front-end](https://seachallenge.netlify.app)
- - [Back-end](https://seachallengeapi.onrender.com/employees)
