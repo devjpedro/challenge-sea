@@ -85,7 +85,6 @@ export function EmployeePersonalDataForm() {
             <Select
               size="large"
               placeholder="Cargo"
-              defaultValue="Cargo 1"
               id="role"
               options={[
                 { value: 'Cargo 1', label: 'Cargo 1' },

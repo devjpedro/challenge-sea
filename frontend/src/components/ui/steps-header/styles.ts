@@ -30,7 +30,7 @@ export const CustomButtonStep = styled(Button)<CustomButtonStepProps>`
   width: 56px !important;
   height: 56px !important;
 
-  border-radius: 1rem;
+  border-radius: 20px;
 
   font-size: 1.5rem;
 
@@ -57,7 +57,7 @@ export const StyledLabel = styled(Typography.Text)`
 `
 
 interface StepCompleteLabelProps {
-  isComplete: boolean
+  $isComplete: boolean
 }
 
 export const StepCompleteLabel = styled(
@@ -68,8 +68,8 @@ export const StepCompleteLabel = styled(
   font-weight: 500;
   font-size: 0.875rem;
 
-  opacity: ${(props) => (props.isComplete ? 1 : 0)};
-  visibility: ${(props) => (props.isComplete ? 'visible' : 'hidden')};
+  opacity: ${(props) => (props.$isComplete ? 1 : 0)};
+  visibility: ${(props) => (props.$isComplete ? 'visible' : 'hidden')};
 
   color: ${(props) => props.theme.colors['black-500']};
 `

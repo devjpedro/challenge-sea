@@ -48,7 +48,7 @@ export function StepsHeader() {
               >
                 Item {step.id}
               </StyledLabel>
-              <StepCompleteLabel isComplete={isStepCompleted(step.id)}>
+              <StepCompleteLabel $isComplete={isStepCompleted(step.id)}>
                 Concluído
               </StepCompleteLabel>
             </Flex>

@@ -19,7 +19,10 @@ export const CustomMenu = styled(Menu)`
 
   li {
     background-color: ${(props) => props.theme.colors['gray-100']};
+
     color: ${(props) => props.theme.colors.primaryColor} !important;
+
+    border-radius: 10px !important;
 
     display: flex !important;
     align-items: center !important;

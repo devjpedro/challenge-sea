@@ -184,7 +184,15 @@ export function ListEmployee() {
                   placement="bottom"
                   arrow
                 >
-                  <FaEllipsisH size={20} />
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <FaEllipsisH size={20} />
+                  </div>
                 </CustomDropdown>
               </CardEmployee>
             ))}
